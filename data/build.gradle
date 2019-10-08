@@ -50,4 +50,18 @@ dependencies {
     kapt "com.google.dagger:dagger-android-processor:$dagger_version"
     kapt "com.google.dagger:dagger-compiler:$dagger_version"
 
+    //Tests
+    testImplementation "junit:junit:$junit_version"
+    testImplementation "org.mockito:mockito-all:$mockito_all"
+    testImplementation "org.mockito:mockito-core:$mockito_core"
+    testImplementation "com.nhaarman:mockito-kotlin:$mockito_kotlin_version"
+    testImplementation "org.hamcrest:hamcrest-all:$hamcrest"
+    testImplementation "com.squareup.okhttp3:mockwebserver:$okhttp_mockwebserver"
+    testImplementation "android.arch.core:core-testing:$android_core_testing"
+    androidTestImplementation("com.android.support.test.espresso:espresso-core:$espresso_version", {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    androidTestImplementation "com.android.support.test:runner:$test_runner_version"
+    testImplementation "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
+
 }
