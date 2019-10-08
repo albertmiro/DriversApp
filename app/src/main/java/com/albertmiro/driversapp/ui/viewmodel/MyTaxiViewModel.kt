@@ -3,7 +3,7 @@ package com.albertmiro.driversapp.ui.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.albertmiro.driversapp.repository.TaxiVehiclesRepositoryImpl
+import com.albertmiro.data.TaxiVehiclesRepositoryImpl
 import com.albertmiro.domain.domain.Vehicle
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -36,7 +36,7 @@ class MyTaxiViewModel @Inject constructor(
         repository.getHamburgTaxis(forceRefresh)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .doOnSubscribe({ isDataLoading.setValue(true) })
+            .doOnSubscribe { isDataLoading.setValue(true) }
             .subscribe(
                 { result ->
                     taxis.postValue(result)

@@ -6,11 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
+import com.albertmiro.common.extensions.isVisible
+import com.albertmiro.common.extensions.showMessage
+import com.albertmiro.domain.domain.Vehicle
 import com.albertmiro.driversapp.R
 import com.albertmiro.driversapp.di.Injectable
-import com.albertmiro.domain.domain.Vehicle
-import com.albertmiro.driversapp.extensions.isVisible
-import com.albertmiro.driversapp.extensions.showMessage
 import com.albertmiro.driversapp.ui.bindTaxi
 import com.albertmiro.driversapp.ui.common.BaseMapFragment
 import com.albertmiro.driversapp.ui.getTaxiCapacity

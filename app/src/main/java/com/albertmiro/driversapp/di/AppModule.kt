@@ -1,5 +1,6 @@
 package com.albertmiro.driversapp.di
 
+import com.albertmiro.data.MyTaxiService
 import com.albertmiro.driversapp.BuildConfig
 import dagger.Module
 import dagger.Provides

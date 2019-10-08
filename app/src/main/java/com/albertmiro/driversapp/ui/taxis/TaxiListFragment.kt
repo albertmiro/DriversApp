@@ -8,11 +8,11 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.albertmiro.common.extensions.isVisible
+import com.albertmiro.common.extensions.showMessage
+import com.albertmiro.domain.domain.Vehicle
 import com.albertmiro.driversapp.R
 import com.albertmiro.driversapp.di.Injectable
-import com.albertmiro.domain.domain.Vehicle
-import com.albertmiro.driversapp.extensions.isVisible
-import com.albertmiro.driversapp.extensions.showMessage
 import com.albertmiro.driversapp.ui.common.BaseFragment
 import com.albertmiro.driversapp.ui.loadTaxiMapFragment
 import com.albertmiro.driversapp.ui.taxis.adapter.TaxiAdapter
@@ -29,9 +29,11 @@ class TaxiListFragment : BaseFragment(),
     private lateinit var myTaxiViewModel: MyTaxiViewModel
     private lateinit var taxiAdapter: TaxiAdapter
 
-    override fun onCreateView(inflater: LayoutInflater,
-                              container: ViewGroup?, savedInstanceState: Bundle?): View? =
-            inflater.inflate(R.layout.fragment_taxi_list, container, false)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?, savedInstanceState: Bundle?
+    ): View? =
+        inflater.inflate(R.layout.fragment_taxi_list, container, false)
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -47,25 +49,33 @@ class TaxiListFragment : BaseFragment(),
 
     private fun getViewModel() {
         myTaxiViewModel = ViewModelProviders.of(activity!!, viewModelFactory)
-                .get(MyTaxiViewModel::class.java)
+            .get(MyTaxiViewModel::class.java)
     }
 
     private fun hideBackOnToolbar() =
-            mainActivity.supportActionBar?.setDisplayHomeAsUpEnabled(false)
+        mainActivity.supportActionBar?.setDisplayHomeAsUpEnabled(false)
 
     private fun initTaxiList() {
+        initAdapter()
+        initList()
+    }
+
+    private fun initAdapter() {
         taxiAdapter = TaxiAdapter().apply {
             onClickAction = {
                 myTaxiViewModel.setCurrentTaxiId(it.id)
                 mainActivity.loadTaxiMapFragment()
             }
         }
+    }
 
+    private fun initList() {
         taxiList.apply {
             adapter = taxiAdapter
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(
-                    context, LinearLayoutManager.VERTICAL, false)
+                context, LinearLayoutManager.VERTICAL, false
+            )
         }
     }
 
@@ -76,8 +86,8 @@ class TaxiListFragment : BaseFragment(),
     }
 
     private fun initObservers() {
-        myTaxiViewModel.isDataLoading().observe(this, Observer {
-            it?.let {
+        myTaxiViewModel.isDataLoading().observe(this, Observer { dataLoaded ->
+            dataLoaded?.let {
                 if (!swipeRefresh.isRefreshing) {
                     progressBar.isVisible(it)
                 }
@@ -110,10 +120,7 @@ class TaxiListFragment : BaseFragment(),
     }
 
     private fun showTaxis(taxis: List<Vehicle>) {
-        if (swipeRefresh.isRefreshing) {
-            swipeRefresh.isRefreshing = false
-        }
-
+        hideRefreshIcon()
         taxiAdapter.setItems(taxis)
 
         if (taxis.isEmpty()) {
