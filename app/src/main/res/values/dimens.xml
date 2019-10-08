@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="margin8">8dp</dimen>
+    <dimen name="margin4">4dp</dimen>
+    <dimen name="margin10">10dp</dimen>
+    <dimen name="margin20">20dp</dimen>
+
+    <dimen name="progressbarSize">35dp</dimen>
+
+    <!-- Text dimensions -->
+    <dimen name="txt13">13sp</dimen>
+    <dimen name="txt15">15sp</dimen>
+    <dimen name="txt18">18dp</dimen>
+    <dimen name="cellHeight">70dp</dimen>
+</resources>

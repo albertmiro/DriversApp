@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">mytest</string>
+    <string name="unexpected_error">Ups! Something went wrong</string>
+    <string name="lost_connection">Network connection lost</string>
+    <string name="no_taxis">No taxis available</string>
+    <string name="passengers_capacity">Capacity: %d passengers</string>
+    <string name="taxi_license">Taxi License #%d</string>
+    <string name="title_info_poi">License #%d capacity: %d</string>
+    <string name="taxis_list_title">Taxis in Hamburg:</string>
+</resources>

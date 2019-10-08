@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#ffffff</color>
+    <color name="colorPrimaryDark">#cccccc</color>
+    <color name="colorPrimaryLight">#ffffff</color>
+    <color name="lightBackground">#dedede</color>
+    <color name="yellowPrimary">#FFC107</color>
+    <color name="yellowLight">#FFF350</color>
+    <color name="colorAccent">#FF9800</color>
+
+    <color name="whiteAlpha85">#D9FFFFFF</color>
+    <color name="whiteAlpha40">#66FFFFFF</color>
+</resources>
+
+    <!-- Colors transparency
+        100% — FF
+        95% — F2
+        90% — E6
+        85% — D9
+        80% — CC
+        75% — BF
+        70% — B3
+        65% — A6
+        60% — 99
+        55% — 8C
+        50% — 80
+        45% — 73
+        40% — 66
+        35% — 59
+        30% — 4D
+        25% — 40
+        20% — 33
+        15% — 26
+        10% — 1A
+        5% — 0D
+        0% — 00
+    -->

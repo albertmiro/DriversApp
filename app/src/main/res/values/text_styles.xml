@@ -1,0 +1,78 @@
+<resources>
+
+    <style name="OneLine">
+        <item name="android:lines">1</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
+    <style name="TextBlack">
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+
+    <style name="TextWhite">
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="TextBlackTransparent">
+        <item name="android:textColor">#B3000000</item>
+    </style>
+
+    <style name="TextBlack.Txt15" parent="TextBlack">
+        <item name="android:textSize">@dimen/txt15</item>
+    </style>
+
+    <style name="TextBlack.Txt18" parent="TextBlack">
+        <item name="android:textSize">@dimen/txt18</item>
+    </style>
+
+    <style name="TextBlackTransparent.Txt13" parent="TextBlackTransparent">
+        <item name="android:textSize">@dimen/txt13</item>
+    </style>
+
+    <style name="TextBlackTransparent.Txt18" parent="TextBlackTransparent">
+        <item name="android:textSize">@dimen/txt18</item>
+    </style>
+
+    <style name="TextBlackTransparent.Txt18.Bold" parent="TextBlackTransparent.Txt18">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextBlack.Txt18.Bold" parent="TextBlack.Txt18">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextBlack.Txt18.Bold.OneLine" parent="TextBlack.Txt18.Bold">
+        <item name="android:lines">1</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
+    <style name="TextBlack.Txt15.Bold" parent="TextBlack.Txt15">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextBlack.Txt15.Bold.OneLine" parent="TextBlack.Txt15.Bold">
+        <item name="android:lines">1</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
+
+    <style name="TextBlackTransparent.Txt13.Italic" parent="TextBlackTransparent.Txt13">
+        <item name="android:textStyle">italic</item>
+    </style>
+
+    <style name="TextBlackTransparent.Txt13.Italic.OneLine" parent="TextBlackTransparent.Txt13.Italic">
+        <item name="android:lines">1</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
+    <style name="ListTitle" parent="TextBlackTransparent.Txt18.Bold" />
+
+    <style name="TaxiListTitle" parent="TextBlack.Txt15.Bold.OneLine" />
+
+    <style name="TaxiListSubtitle" parent="TextBlackTransparent.Txt13.Italic.OneLine" />
+
+</resources>

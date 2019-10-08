@@ -1,0 +1,123 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.1"
+    defaultConfig {
+        applicationId "com.albertmiro.driversapp"
+        minSdkVersion 22
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField 'String', 'BUILD_DATE', '"' + new Date().format('yyyy-MM-dd') + '"'
+    }
+
+    compileOptions {
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
+    }
+
+    buildTypes {
+        debug {
+            buildConfigField("String", "BASE_URL", "\"https://fake-poi-api.mytaxi.com/\"")
+            resValue "string", "google_maps_api_key", getMapsApiKey()
+        }
+
+        release {
+            buildConfigField("String", "BASE_URL", "\"https://fake-poi-api.mytaxi.com/\"")
+            resValue "string", "google_maps_api_key", getMapsApiKey()
+
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project(':domain')
+    implementation project(':data')
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.core:core-ktx:1.1.0'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+
+    //Android libraries
+    implementation "com.android.support:appcompat-v7:$support_library_version"
+    implementation "com.android.support:design:$support_library_version"
+    implementation "com.android.support:cardview-v7:$support_library_version"
+    implementation "android.arch.lifecycle:extensions:$android_arch_components_version"
+
+    //Google Maps
+    implementation "com.google.android.gms:play-services-maps:$google_maps_version"
+
+    //Anko
+    implementation "org.jetbrains.anko:anko:$anko_version"
+    implementation "org.jetbrains.anko:anko-commons:$anko_version"
+    implementation "org.jetbrains.anko:anko-coroutines:$anko_version"
+
+    //Smooth Progress Bar
+    implementation "com.github.castorflex.smoothprogressbar:library-circular:$smoothprogressbar_circular_version"
+
+    //Dagger2
+    implementation "com.google.dagger:dagger:$dagger_version"
+    implementation "com.google.dagger:dagger-android:$dagger_version"
+    implementation "com.google.dagger:dagger-android-support:$dagger_version"
+    kapt "com.google.dagger:dagger-android-processor:$dagger_version"
+    kapt "com.google.dagger:dagger-compiler:$dagger_version"
+
+
+    //Retrofit
+    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit_version"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
+
+    //RxJava2
+    implementation "io.reactivex.rxjava2:rxandroid:$rx_android_version"
+
+    //Tests
+    testImplementation "junit:junit:$junit_version"
+    testImplementation "org.mockito:mockito-all:$mockito_all"
+    testImplementation "org.mockito:mockito-core:$mockito_core"
+    testImplementation "com.nhaarman:mockito-kotlin:$mockito_kotlin_version"
+    testImplementation "org.hamcrest:hamcrest-all:$hamcrest"
+    testImplementation "com.squareup.okhttp3:mockwebserver:$okhttp_mockwebserver"
+    testImplementation "android.arch.core:core-testing:$android_core_testing"
+    androidTestImplementation("com.android.support.test.espresso:espresso-core:$espresso_version", {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    androidTestImplementation "com.android.support.test:runner:$test_runner_version"
+    testImplementation "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
+}
+
+
+/*
+* This method is used to retrieve the Google Maps API Key from a project.properties file,
+* it should contain a google_maps_api_key field on it with the key. In this way if you want
+* to publish this project on a public server, just with not pushing the project.properties file
+* you API Key will be secure.
+*/
+
+def getMapsApiKey() {
+    Properties properties = new Properties()
+    properties.load(new File(rootDir.absolutePath + "/project.properties").newDataInputStream())
+    def mapsApiKey = properties.getProperty('google_maps_api_key', null)
+    if (mapsApiKey == null) {
+        throw new GradleException(
+                "Google Maps API Key is missing. Please go to your project.properties file and define a google_maps_api_key," +
+                        " you can create a new one at this site: https://developers.google.com/maps/android/")
+    }
+    return mapsApiKey
+}
