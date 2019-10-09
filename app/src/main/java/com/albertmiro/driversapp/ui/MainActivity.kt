@@ -3,7 +3,7 @@ package com.albertmiro.driversapp.ui
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.albertmiro.driversapp.R
-import com.albertmiro.driversapp.ui.common.BaseActivity
+import com.albertmiro.driversapp.ui.base.BaseActivity
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
 import kotlinx.android.synthetic.main.activity_main.*
@@ -19,12 +19,8 @@ class MainActivity : BaseActivity(), HasSupportFragmentInjector {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        setUpToolbar()
-        loadTaxiListFragment()
-    }
-
-    private fun setUpToolbar() {
         setSupportActionBar(toolbar)
+        loadTaxiListFragment()
     }
 
     override fun onSupportNavigateUp(): Boolean {

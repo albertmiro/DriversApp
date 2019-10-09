@@ -1,4 +1,4 @@
-package com.albertmiro.driversapp.ui.common
+package com.albertmiro.driversapp.ui.base
 
 import androidx.appcompat.app.AppCompatActivity
 

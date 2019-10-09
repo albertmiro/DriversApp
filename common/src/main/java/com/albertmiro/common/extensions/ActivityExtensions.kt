@@ -1,7 +1,7 @@
 package com.albertmiro.common.extensions
 
-import android.app.Activity
+import android.content.Context
 import android.widget.Toast
 
-fun Activity.showMessage(message: String) =
+fun Context.showMessage(message: String) =
     Toast.makeText(this, message, Toast.LENGTH_SHORT).show()

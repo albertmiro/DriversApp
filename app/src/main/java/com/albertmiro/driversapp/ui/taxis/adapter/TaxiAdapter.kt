@@ -2,12 +2,12 @@ package com.albertmiro.driversapp.ui.taxis.adapter
 
 import android.view.ViewGroup
 import com.albertmiro.domain.domain.Vehicle
-import com.albertmiro.driversapp.ui.common.adapter.RecyclerViewAdapterBase
-import com.albertmiro.driversapp.ui.common.adapter.ViewWrapper
+import com.albertmiro.driversapp.ui.base.adapter.RecyclerViewAdapterBase
+import com.albertmiro.driversapp.ui.base.adapter.ViewWrapper
 
 class TaxiAdapter : RecyclerViewAdapterBase<Vehicle, TaxiItemView>() {
 
-    var onClickAction: ((taxi: Vehicle) -> Unit)? = null
+    var onClickAction: ((Vehicle) -> Unit)? = null
 
     override fun onCreateItemView(parent: ViewGroup, viewType: Int) =
         TaxiItemView(context = parent.context)

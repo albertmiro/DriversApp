@@ -1,10 +1,11 @@
-package com.albertmiro.driversapp.ui.common
+package com.albertmiro.driversapp.ui.base
 
+import com.albertmiro.driversapp.ui.viewmodel.BaseViewModel
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import kotlinx.android.synthetic.main.fragment_taxi_map.*
 
-open class BaseMapFragment : BaseFragment(), OnMapReadyCallback {
+abstract class BaseMapFragment<T : BaseViewModel> : BaseFragment<T>(), OnMapReadyCallback {
 
     var isMapReady: Boolean = false
     var googleMap: GoogleMap? = null

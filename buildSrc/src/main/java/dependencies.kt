@@ -27,17 +27,9 @@ object Dependencies {
     val androidxJunit = "androidx.test.ext:junit:1.1.1"
     val androidxEspresso = "androidx.test.espresso:espresso-core:${Versions.espresso_version}"
 
-    //Google Maps
-    val googleMaps = "com.google.android.gms:play-services-maps:${Versions.google_maps_version}"
-
     //Anko
     val anko = "org.jetbrains.anko:anko:${Versions.anko_version}"
     val ankoCommons = "org.jetbrains.anko:anko-commons:${Versions.anko_version}"
-    val coroutines = "org.jetbrains.anko:anko-coroutines:${Versions.anko_version}"
-
-    //Smooth Progress Bar
-    val progressBar =
-        "com.github.castorflex.smoothprogressbar:library-circular:${Versions.smoothprogressbar_circular_version}"
 
     //Dagger2
     val dagger = "com.google.dagger:dagger:${Versions.dagger_version}"
@@ -47,11 +39,17 @@ object Dependencies {
         "com.google.dagger:dagger-android-processor:${Versions.dagger_version}"
     val daggerCompiler = "com.google.dagger:dagger-compiler:${Versions.dagger_version}"
 
-
     //Retrofit
     val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit_version}"
     val retrofitRx = "com.squareup.retrofit2:adapter-rxjava2:${Versions.retrofit_version}"
     val retrofitGson = "com.squareup.retrofit2:converter-gson:${Versions.retrofit_version}"
+
+    //Google Maps
+    val googleMaps = "com.google.android.gms:play-services-maps:${Versions.google_maps_version}"
+
+    //Smooth Progress Bar
+    val progressBar =
+        "com.github.castorflex.smoothprogressbar:library-circular:${Versions.smoothprogressbar_circular_version}"
 
     //RxJava2
     val rxJava = "io.reactivex.rxjava2:rxandroid:${Versions.rx_android_version}"
@@ -67,4 +65,64 @@ object Dependencies {
     val testRunner = "com.android.support.test:runner:${Versions.test_runner_version}"
     val testJunit = "org.jetbrains.kotlin:kotlin-test-junit:${Versions.kotlin_version}"
 
+}
+
+object Buckets {
+
+    val retrofit =
+        listOf(
+            Dependencies.retrofit,
+            Dependencies.retrofitGson,
+            Dependencies.retrofitRx
+        )
+
+    val rxJava =
+        listOf(
+            Dependencies.rxJava
+        )
+
+    val appLibraries =
+        listOf(
+            Dependencies.progressBar,
+            Dependencies.googleMaps
+        )
+
+    val baseAndroid =
+        listOf(
+            Dependencies.kotlin,
+            Dependencies.appCompat,
+            Dependencies.androidxCore,
+            Dependencies.constraintLayout,
+            Dependencies.androidxCore,
+            Dependencies.androidxJunit,
+            Dependencies.androidxEspresso
+        )
+
+    val testing =
+        listOf(
+            Dependencies.jUnit,
+            Dependencies.mockitoAll,
+            Dependencies.mockitoCore,
+            Dependencies.mockitoKotlin,
+            Dependencies.hamcrest,
+            Dependencies.mockWebServer,
+            Dependencies.coreTesting,
+            Dependencies.testRunner,
+            Dependencies.testJunit
+        )
+
+    val dagger =
+        listOf(
+            Dependencies.dagger,
+            Dependencies.daggerAndroid,
+            Dependencies.daggerSupport,
+            Dependencies.daggerAndroidProcessor,
+            Dependencies.daggerCompiler
+        )
+
+    val anko =
+        listOf(
+            Dependencies.anko,
+            Dependencies.ankoCommons
+        )
 }

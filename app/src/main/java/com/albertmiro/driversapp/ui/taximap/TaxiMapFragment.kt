@@ -1,62 +1,55 @@
 package com.albertmiro.driversapp.ui.taximap
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import com.albertmiro.common.extensions.isVisible
 import com.albertmiro.common.extensions.showMessage
 import com.albertmiro.domain.domain.Vehicle
 import com.albertmiro.driversapp.R
-import com.albertmiro.driversapp.di.Injectable
+import com.albertmiro.driversapp.ui.base.BaseFragment
 import com.albertmiro.driversapp.ui.bindTaxi
-import com.albertmiro.driversapp.ui.common.BaseMapFragment
 import com.albertmiro.driversapp.ui.getTaxiCapacity
 import com.albertmiro.driversapp.ui.viewmodel.MyTaxiViewModel
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import kotlinx.android.synthetic.main.fragment_taxi_map.*
 import kotlinx.android.synthetic.main.item_taxi.*
-import javax.inject.Inject
 
-class TaxiMapFragment : BaseMapFragment(),
-    Injectable {
+class TaxiMapFragment : BaseFragment<MyTaxiViewModel>(), OnMapReadyCallback {
 
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+    override val layoutId: Int = R.layout.fragment_taxi_map
 
-    private lateinit var myTaxiViewModel: MyTaxiViewModel
     private var taxiId: Int = 0
     private var taxis: List<Vehicle>? = null
     private var waitingForMap: Boolean = false
+    private var isMapReady: Boolean = false
+    private var googleMap: GoogleMap? = null
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?, savedInstanceState: Bundle?
-    ): View? =
-        inflater.inflate(R.layout.fragment_taxi_map, container, false)
+    companion object {
+        fun newInstance(): TaxiMapFragment {
+            return TaxiMapFragment()
+        }
+    }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
         showActionBar()
         initMapView(savedInstanceState)
-        getViewModel()
         initLocalVariables()
         showTaxis()
     }
 
-    private fun showActionBar() {
-        mainActivity.supportActionBar?.setDisplayHomeAsUpEnabled(true)
+    override fun provideViewModel(): MyTaxiViewModel {
+        return ViewModelProviders.of(activity!!, viewModelFactory)
+            .get(MyTaxiViewModel::class.java)
     }
 
-    private fun getViewModel() {
-        myTaxiViewModel = ViewModelProviders.of(activity!!, viewModelFactory)
-            .get(MyTaxiViewModel::class.java)
+    private fun showActionBar() {
+        mainActivity.supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
     private fun initMapView(savedInstanceState: Bundle?) {
@@ -65,12 +58,13 @@ class TaxiMapFragment : BaseMapFragment(),
     }
 
     private fun initLocalVariables() {
-        this.taxiId = myTaxiViewModel.getCurrentTaxiId().value!!
-        this.taxis = myTaxiViewModel.getTaxis().value
+        this.taxiId = viewModel.getCurrentTaxiId().value ?: -1
+        this.taxis = viewModel.getTaxis().value
     }
 
     override fun onMapReady(googleMap: GoogleMap?) {
-        super.onMapReady(googleMap)
+        isMapReady = true
+        this.googleMap = googleMap
         if (waitingForMap) {
             showTaxisOnMap()
         }
@@ -79,7 +73,7 @@ class TaxiMapFragment : BaseMapFragment(),
     private fun showTaxis() {
         taxis?.let {
             if (it.isEmpty()) {
-                mainActivity.showMessage(getString(R.string.no_taxis))
+                context?.showMessage(getString(R.string.no_taxis))
             } else {
                 if (isMapReady) {
                     showTaxisOnMap()
@@ -133,5 +127,23 @@ class TaxiMapFragment : BaseMapFragment(),
         }
     }
 
+    override fun onResume() {
+        mapView?.onResume()
+        super.onResume()
+    }
 
+    override fun onPause() {
+        mapView?.onPause()
+        super.onPause()
+    }
+
+    override fun onDestroy() {
+        mapView?.onDestroy()
+        super.onDestroy()
+    }
+
+    override fun onLowMemory() {
+        mapView?.onLowMemory()
+        super.onLowMemory()
+    }
 }

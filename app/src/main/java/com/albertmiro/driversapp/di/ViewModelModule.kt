@@ -2,7 +2,7 @@ package com.albertmiro.driversapp.di
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.albertmiro.driversapp.ui.viewmodel.AppViewModelFactory
+import com.albertmiro.driversapp.ui.base.AppViewModelFactory
 import com.albertmiro.driversapp.ui.viewmodel.MyTaxiViewModel
 import dagger.Binds
 import dagger.Module

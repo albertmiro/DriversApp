@@ -1,4 +1,4 @@
-package com.albertmiro.driversapp.ui.common.adapter
+package com.albertmiro.driversapp.ui.base.adapter
 
 import android.view.View
 import android.view.ViewGroup

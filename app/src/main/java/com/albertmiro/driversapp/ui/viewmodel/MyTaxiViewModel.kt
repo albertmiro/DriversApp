@@ -1,8 +1,8 @@
 package com.albertmiro.driversapp.ui.viewmodel
 
+import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.albertmiro.data.TaxiVehiclesRepositoryImpl
 import com.albertmiro.domain.domain.Vehicle
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -11,8 +11,8 @@ import java.net.UnknownHostException
 import javax.inject.Inject
 
 class MyTaxiViewModel @Inject constructor(
-    private val repository: TaxiVehiclesRepositoryImpl
-) : ViewModel() {
+    private val repository: TaxiVehiclesRepositoryImpl, app: Application
+) : BaseViewModel(app) {
 
     private var isDataLoading: MutableLiveData<Boolean> = MutableLiveData()
     private var isNetworkError: MutableLiveData<Boolean> = MutableLiveData()
@@ -33,7 +33,7 @@ class MyTaxiViewModel @Inject constructor(
     fun getCurrentTaxiId() = taxiId
 
     fun loadTaxis(forceRefresh: Boolean) {
-        repository.getHamburgTaxis(forceRefresh)
+        val subscribe = repository.getHamburgTaxis(forceRefresh)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSubscribe { isDataLoading.setValue(true) }

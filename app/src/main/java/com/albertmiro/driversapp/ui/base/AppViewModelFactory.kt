@@ -1,4 +1,4 @@
-package com.albertmiro.driversapp.ui.viewmodel
+package com.albertmiro.driversapp.ui.base
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -9,7 +9,7 @@ import javax.inject.Singleton
 
 @Singleton
 class AppViewModelFactory @Inject constructor(
-        private val creators: Map<Class<out ViewModel>, @JvmSuppressWildcards Provider<ViewModel>>
+    private val creators: Map<Class<out ViewModel>, @JvmSuppressWildcards Provider<ViewModel>>
 ) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         val creator = creators[modelClass] ?: creators.entries.firstOrNull {
