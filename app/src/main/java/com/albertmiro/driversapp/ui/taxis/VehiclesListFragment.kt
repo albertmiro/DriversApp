@@ -8,23 +8,23 @@ import com.albertmiro.common.extensions.showMessage
 import com.albertmiro.domain.domain.Vehicle
 import com.albertmiro.driversapp.R
 import com.albertmiro.driversapp.ui.base.BaseFragment
-import com.albertmiro.driversapp.ui.loadTaxiMapFragment
-import com.albertmiro.driversapp.ui.taxis.adapter.TaxiAdapter
+import com.albertmiro.driversapp.ui.loadVehiclesMapFragment
+import com.albertmiro.driversapp.ui.taxis.adapter.VehiclesAdapter
 import com.albertmiro.driversapp.ui.viewmodel.VehiclesViewModel
-import kotlinx.android.synthetic.main.fragment_taxi_list.*
+import kotlinx.android.synthetic.main.fragment_vehicles_list.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
-class TaxiListFragment : BaseFragment() {
+class VehiclesListFragment : BaseFragment() {
 
-    override val layoutId: Int = R.layout.fragment_taxi_list
+    override val layoutId: Int = R.layout.fragment_vehicles_list
 
     private val vehiclesViewModel: VehiclesViewModel by sharedViewModel()
 
-    private lateinit var taxiAdapter: TaxiAdapter
+    private lateinit var vehiclesAdapter: VehiclesAdapter
 
     companion object {
-        fun newInstance(): TaxiListFragment {
-            return TaxiListFragment()
+        fun newInstance(): VehiclesListFragment {
+            return VehiclesListFragment()
         }
     }
 
@@ -32,7 +32,8 @@ class TaxiListFragment : BaseFragment() {
         super.onActivityCreated(savedInstanceState)
 
         hideBackOnToolbar()
-        iniTaxiList()
+        initAdapter()
+        initList()
         initSwipeRefresh()
         initObservers()
 
@@ -43,23 +44,18 @@ class TaxiListFragment : BaseFragment() {
         mainActivity.supportActionBar?.setDisplayHomeAsUpEnabled(false)
     }
 
-    private fun iniTaxiList() {
-        initAdapter()
-        initList()
-    }
-
     private fun initAdapter() {
-        taxiAdapter = TaxiAdapter().apply {
+        vehiclesAdapter = VehiclesAdapter().apply {
             onClickAction = {
                 vehiclesViewModel.setCurrentTaxiId(it.id)
-                mainActivity.loadTaxiMapFragment()
+                mainActivity.loadVehiclesMapFragment()
             }
         }
     }
 
     private fun initList() {
         taxiList.apply {
-            adapter = taxiAdapter
+            adapter = vehiclesAdapter
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(
                 context, LinearLayoutManager.VERTICAL, false
@@ -103,10 +99,9 @@ class TaxiListFragment : BaseFragment() {
 
     private fun showVehicles(vehicles: List<Vehicle>) {
         hideRefreshIcon()
-        taxiAdapter.setItems(vehicles)
-
+        vehiclesAdapter.setItems(vehicles)
         if (vehicles.isEmpty()) {
-            context?.showMessage(getString(R.string.no_taxis))
+            context?.showMessage(getString(R.string.no_vehicles))
         }
     }
 

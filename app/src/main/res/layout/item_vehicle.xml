@@ -9,13 +9,13 @@
     android:padding="@dimen/margin4">
 
     <ImageView
-        android:id="@+id/taxiImage"
+        android:id="@+id/vehicleImage"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin10"
         android:adjustViewBounds="true"
         android:scaleType="centerInside"
-        android:src="@drawable/taxi2"
+        android:src="@drawable/vehicle2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@+id/guideline"
@@ -31,19 +31,19 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/taxiHeader"
-            style="TaxiListTitle"
+            android:id="@+id/vehicleHeader"
+            style="VehicleListTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/margin8"
-            tools:text="Taxi Number: 121445" />
+            tools:text="Vehicle Number: 121445" />
 
         <TextView
-            android:id="@+id/taxiDescription"
-            style="@style/TaxiListSubtitle"
+            android:id="@+id/vehicleDescription"
+            style="@style/VehicleListSubtitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="Taxi for families" />
+            tools:text="Vehicle for families" />
 
     </LinearLayout>
 

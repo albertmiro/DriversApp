@@ -1,19 +1,19 @@
 package com.albertmiro.driversapp.ui
 
 import com.albertmiro.driversapp.R
-import com.albertmiro.driversapp.ui.taximap.TaxiMapFragment
-import com.albertmiro.driversapp.ui.taxis.TaxiListFragment
+import com.albertmiro.driversapp.ui.taxis.VehiclesListFragment
+import com.albertmiro.driversapp.ui.vehiclemap.VehiclesMapFragment
 
-fun MainActivity.loadTaxiListFragment() {
+fun MainActivity.loadVehiclesListFragment() {
     supportFragmentManager.beginTransaction()
-        .replace(R.id.fragmentContainer, TaxiListFragment.newInstance())
+        .replace(R.id.fragmentContainer, VehiclesListFragment.newInstance())
         .commit()
 }
 
-fun MainActivity.loadTaxiMapFragment() {
-    val taxiMapFragment = TaxiMapFragment.newInstance()
+fun MainActivity.loadVehiclesMapFragment() {
+    val vehiclesMapFragment = VehiclesMapFragment.newInstance()
     supportFragmentManager.beginTransaction()
-        .addToBackStack(taxiMapFragment.javaClass.name)
-        .replace(R.id.fragmentContainer, taxiMapFragment)
+        .addToBackStack(vehiclesMapFragment.javaClass.name)
+        .replace(R.id.fragmentContainer, vehiclesMapFragment)
         .commit()
 }

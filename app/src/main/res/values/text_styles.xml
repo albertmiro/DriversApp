@@ -73,6 +73,6 @@
 
     <style name="TaxiListTitle" parent="TextBlack.Txt15.Bold.OneLine" />
 
-    <style name="TaxiListSubtitle" parent="TextBlackTransparent.Txt13.Italic.OneLine" />
+    <style name="VehicleListSubtitle" parent="TextBlackTransparent.Txt13.Italic.OneLine" />
 
 </resources>
