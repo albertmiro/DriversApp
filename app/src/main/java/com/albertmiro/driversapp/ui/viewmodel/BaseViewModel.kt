@@ -1,12 +1,19 @@
 package com.albertmiro.driversapp.ui.viewmodel
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.ViewModel
+import io.reactivex.disposables.CompositeDisposable
 
-open class BaseViewModel(protected val app: Application) : AndroidViewModel(app), Base.ViewModel {
+open class BaseViewModel : ViewModel(), Base.ViewModel {
+
+    val compositeDisposable = CompositeDisposable()
 
     override fun onNetworkError(exception: Throwable) {}
 
     override fun onUnknownError(exception: Throwable) {}
+
+    override fun onCleared() {
+        compositeDisposable.dispose()
+        super.onCleared()
+    }
 
 }

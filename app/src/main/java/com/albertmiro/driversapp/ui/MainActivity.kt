@@ -1,20 +1,18 @@
 package com.albertmiro.driversapp.ui
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import com.albertmiro.driversapp.R
 import com.albertmiro.driversapp.ui.base.BaseActivity
-import dagger.android.DispatchingAndroidInjector
-import dagger.android.support.HasSupportFragmentInjector
+import com.albertmiro.driversapp.ui.viewmodel.VehiclesViewModel
 import kotlinx.android.synthetic.main.activity_main.*
-import javax.inject.Inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class MainActivity : BaseActivity(), HasSupportFragmentInjector {
+class MainActivity : BaseActivity() {
 
-    @Inject
-    lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Fragment>
-
-    override fun supportFragmentInjector() = dispatchingAndroidInjector
+    // Using the Activity to create the ViewModel, would be shared between
+    // the fragments due to the simplicity of the app.
+    // The relation should be 1 Fragment <-> 1 ViewModel
+    val vehiclesViewModel: VehiclesViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
