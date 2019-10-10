@@ -1,0 +1,18 @@
+default_platform(:android)
+
+# Android build to perform tests on debug:
+lane :test do
+  # Execute Gradle task
+  gradle(task: 'assemble', build_type: 'DebugAndroidTest')
+end
+
+# Android build
+# build_type: 'Debug', 'Release'
+lane :build do |options|
+  # Check that we have a build_type set
+  raise "build_type option not specified. Usage: fastlane build build_type:BUILD_TYPE" unless options[:build_type]
+  # Set the build_type from options
+  build_type = options[:build_type]
+  # Execute Gradle task
+  gradle(task: 'assemble', build_type: build_type)
+end

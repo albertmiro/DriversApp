@@ -1,0 +1,43 @@
+language: android
+jdk: oraclejdk8
+rvm: 2.0.0
+
+before_cache:
+  - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+
+cache:
+  directories:
+    - $HOME/.gradle/caches/
+    - $HOME/.gradle/wrapper/
+    - $HOME/.android/build-cache
+
+before_install:
+  - bundle install
+
+android:
+  components:
+    - tools
+    - platform-tools
+    - build-tools-29.0.1 # Match build-tools version used in build.gradle
+    - android-29
+    - extra-google-google_play_services
+    - extra-google-m2repository
+    - extra-android-m2repository
+
+jobs:
+  include:
+    - stage: build
+      name: "Building Android on Debug"
+      script: bundle exec fastlane build build_type:"Debug"
+
+    - stage: test
+      name: "Running tests"
+      script: bundle exec fastlane test
+
+stages:
+  - name: build
+    if: (type = pull_request OR type = push) AND (branch = develop OR branch = master)
+
+  - name: test
+    if: (type = pull_request OR type = push) AND (branch = develop OR branch = master)
