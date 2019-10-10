@@ -31,13 +31,13 @@ jobs:
       name: "Building Android on Debug"
       script: bundle exec fastlane build build_type:"Debug"
 
-#    - stage: test
-#      name: "Running tests"
-#      script: bundle exec fastlane test
+    - stage: test
+      name: "Running tests"
+      script: bundle exec fastlane test
 
 stages:
   - name: build
     if: (type = pull_request OR type = push) AND (branch = develop OR branch = master)
 
- # - name: test
- #   if: (type = pull_request OR type = push) AND (branch = develop OR branch = master)
+  - name: test
+    if: (type = pull_request OR type = push) AND (branch = develop OR branch = master)
