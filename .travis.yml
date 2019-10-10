@@ -12,6 +12,9 @@ cache:
     - $HOME/.gradle/wrapper/
     - $HOME/.android/build-cache
 
+before_install:
+  - bundle install
+
 android:
   components:
     - tools
