@@ -18,7 +18,7 @@ class MainActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
-        loadTaxiListFragment()
+        loadVehiclesListFragment()
     }
 
     override fun onSupportNavigateUp(): Boolean {
