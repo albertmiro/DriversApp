@@ -29,7 +29,7 @@ jobs:
   include:
     - stage: build
       name: "Building Android on Debug"
-      script: bundle exec fastlane build build_type="Debug"
+      script: bundle exec fastlane build build_type:"Debug"
 
 #    - stage: test
 #      name: "Running tests"
