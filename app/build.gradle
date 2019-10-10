@@ -26,12 +26,12 @@ android {
 
     buildTypes {
         debug {
-            buildConfigField("String", "BASE_URL", "\"https://fake-poi-api.mytaxi.com/\"")
+            buildConfigField("String", "BASE_URL", "\"https://my-json-server.typicode.com/albertmiro/mock-json-api/\"")
             resValue "string", "google_maps_api_key", getMapsApiKey()
         }
 
         release {
-            buildConfigField("String", "BASE_URL", "\"https://fake-poi-api.mytaxi.com/\"")
+            buildConfigField("String", "BASE_URL", "\"https://my-json-server.typicode.com/albertmiro/mock-json-api/\"")
             resValue "string", "google_maps_api_key", getMapsApiKey()
 
             minifyEnabled false

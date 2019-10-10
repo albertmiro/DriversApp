@@ -3,7 +3,7 @@ package com.albertmiro.driversapp.ui.viewmodel
 import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.albertmiro.data.TaxiVehiclesRepositoryImpl
+import com.albertmiro.data.repository.TaxiVehiclesRepositoryImpl
 import com.albertmiro.domain.domain.Vehicle
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
