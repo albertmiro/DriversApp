@@ -6,7 +6,6 @@ import okio.Okio
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
-import org.mockito.Mockito
 import retrofit2.HttpException
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
@@ -14,9 +13,9 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.io.IOException
 import java.nio.charset.StandardCharsets
 
-class MyTaxiServiceTest {
+class VehiclesServiceTest {
 
-    lateinit var service: MyTaxiService
+    lateinit var service: VehiclesService
     lateinit var mockWebServer: MockWebServer
 
     @Before
@@ -28,7 +27,7 @@ class MyTaxiServiceTest {
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build()
-                .create(MyTaxiService::class.java)
+                .create(VehiclesService::class.java)
     }
 
     @After
@@ -40,7 +39,7 @@ class MyTaxiServiceTest {
     @Test
     fun shouldGetNotEmptyListOfTaxis() {
         enqueueResponse("mytaxi_response.json")
-        service.getTaxisByCoordinates(Mockito.anyDouble(), Mockito.anyDouble(), Mockito.anyDouble(), Mockito.anyDouble())
+        service.getVehicles()
                 .test()
                 .assertValue({ response -> response.poiList.isNotEmpty() })
     }
@@ -48,7 +47,7 @@ class MyTaxiServiceTest {
     @Test
     fun shouldGetCorrectNumberOfTaxis() {
         enqueueResponse("mytaxi_response.json")
-        service.getTaxisByCoordinates(Mockito.anyDouble(), Mockito.anyDouble(), Mockito.anyDouble(), Mockito.anyDouble())
+        service.getVehicles()
                 .test()
                 .assertValue({ response -> response.poiList.size == 30 })
     }
@@ -56,7 +55,7 @@ class MyTaxiServiceTest {
     @Test
     fun shouldGetTaxiWithCorrectValues() {
         enqueueResponse("mytaxi_response.json")
-        service.getTaxisByCoordinates(Mockito.anyDouble(), Mockito.anyDouble(), Mockito.anyDouble(), Mockito.anyDouble())
+        service.getVehicles()
                 .test()
                 .assertValue({ response -> response.poiList.isNotEmpty() })
                 .assertValue({ response -> response.poiList[0].id == 555331 })
@@ -69,7 +68,7 @@ class MyTaxiServiceTest {
     @Test
     fun shouldGetEmptyResponse() {
         enqueueResponse("mytaxi_response_empty.json")
-        service.getTaxisByCoordinates(Mockito.anyDouble(), Mockito.anyDouble(), Mockito.anyDouble(), Mockito.anyDouble())
+        service.getVehicles()
                 .test()
                 .assertValue({ response -> response.poiList == null })
     }
@@ -77,7 +76,7 @@ class MyTaxiServiceTest {
     @Test
     fun shouldGetEmptyPOISResponse() {
         enqueueResponse("mytaxi_response_empty_pois.json")
-        service.getTaxisByCoordinates(Mockito.anyDouble(), Mockito.anyDouble(), Mockito.anyDouble(), Mockito.anyDouble())
+        service.getVehicles()
                 .test()
                 .assertValue({ response -> response.poiList.isEmpty() })
     }
@@ -85,7 +84,7 @@ class MyTaxiServiceTest {
     @Test
     fun error400() {
         mockWebServer.enqueue(MockResponse().setBody("{error:\"bad request\"").setResponseCode(400))
-        service.getTaxisByCoordinates(Mockito.anyDouble(), Mockito.anyDouble(), Mockito.anyDouble(), Mockito.anyDouble())
+        service.getVehicles()
                 .test()
                 .assertError(HttpException::class.java)
     }

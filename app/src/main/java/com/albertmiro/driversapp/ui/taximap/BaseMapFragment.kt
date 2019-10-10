@@ -1,14 +1,14 @@
-package com.albertmiro.driversapp.ui.base
+package com.albertmiro.driversapp.ui.taximap
 
-import com.albertmiro.driversapp.ui.viewmodel.BaseViewModel
+import com.albertmiro.driversapp.ui.base.BaseFragment
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import kotlinx.android.synthetic.main.fragment_taxi_map.*
 
-abstract class BaseMapFragment<T : BaseViewModel> : BaseFragment<T>(), OnMapReadyCallback {
+abstract class BaseMapFragment : BaseFragment(), OnMapReadyCallback {
 
-    var isMapReady: Boolean = false
-    var googleMap: GoogleMap? = null
+    private var isMapReady: Boolean = false
+    private var googleMap: GoogleMap? = null
 
     override fun onResume() {
         mapView?.onResume()
@@ -30,8 +30,5 @@ abstract class BaseMapFragment<T : BaseViewModel> : BaseFragment<T>(), OnMapRead
         super.onLowMemory()
     }
 
-    override fun onMapReady(googleMap: GoogleMap?) {
-        isMapReady = true
-        this.googleMap = googleMap
-    }
+
 }

@@ -1,29 +1,29 @@
 package com.albertmiro.driversapp.ui.taximap
 
 import android.os.Bundle
-import androidx.lifecycle.ViewModelProviders
 import com.albertmiro.common.extensions.isVisible
 import com.albertmiro.common.extensions.showMessage
 import com.albertmiro.domain.domain.Vehicle
 import com.albertmiro.driversapp.R
-import com.albertmiro.driversapp.ui.base.BaseFragment
 import com.albertmiro.driversapp.ui.bindTaxi
 import com.albertmiro.driversapp.ui.getTaxiCapacity
-import com.albertmiro.driversapp.ui.viewmodel.MyTaxiViewModel
+import com.albertmiro.driversapp.ui.viewmodel.VehiclesViewModel
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import kotlinx.android.synthetic.main.fragment_taxi_map.*
 import kotlinx.android.synthetic.main.item_taxi.*
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
-class TaxiMapFragment : BaseFragment<MyTaxiViewModel>(), OnMapReadyCallback {
+class TaxiMapFragment : BaseMapFragment() {
 
     override val layoutId: Int = R.layout.fragment_taxi_map
+    private val vehiclesViewModel: VehiclesViewModel by sharedViewModel()
 
-    private var taxiId: Int = 0
-    private var taxis: List<Vehicle>? = null
+    private var vehicleId: Int = 0
+
+    private var vehicles: List<Vehicle>? = null
     private var waitingForMap: Boolean = false
     private var isMapReady: Boolean = false
     private var googleMap: GoogleMap? = null
@@ -43,23 +43,9 @@ class TaxiMapFragment : BaseFragment<MyTaxiViewModel>(), OnMapReadyCallback {
         showTaxis()
     }
 
-    override fun provideViewModel(): MyTaxiViewModel {
-        return ViewModelProviders.of(activity!!, viewModelFactory)
-            .get(MyTaxiViewModel::class.java)
-    }
-
-    private fun showActionBar() {
-        mainActivity.supportActionBar?.setDisplayHomeAsUpEnabled(true)
-    }
-
     private fun initMapView(savedInstanceState: Bundle?) {
         mapView.onCreate(savedInstanceState)
         mapView.getMapAsync(this)
-    }
-
-    private fun initLocalVariables() {
-        this.taxiId = viewModel.getCurrentTaxiId().value ?: -1
-        this.taxis = viewModel.getTaxis().value
     }
 
     override fun onMapReady(googleMap: GoogleMap?) {
@@ -70,8 +56,17 @@ class TaxiMapFragment : BaseFragment<MyTaxiViewModel>(), OnMapReadyCallback {
         }
     }
 
+    private fun showActionBar() {
+        mainActivity.supportActionBar?.setDisplayHomeAsUpEnabled(true)
+    }
+
+    private fun initLocalVariables() {
+        this.vehicleId = vehiclesViewModel.getCurrentVehicleId().value ?: -1
+        this.vehicles = vehiclesViewModel.getTaxis().value
+    }
+
     private fun showTaxis() {
-        taxis?.let {
+        vehicles?.let {
             if (it.isEmpty()) {
                 context?.showMessage(getString(R.string.no_taxis))
             } else {
@@ -86,8 +81,8 @@ class TaxiMapFragment : BaseFragment<MyTaxiViewModel>(), OnMapReadyCallback {
 
     private fun showTaxisOnMap() {
         lateinit var taxi: Vehicle
-        taxis?.forEach {
-            if (it.id == taxiId) taxi = it
+        vehicles?.forEach {
+            if (it.id == vehicleId) taxi = it
             else addMarkerOnMap(it, false)
         }
         zoomOnSelectedTaxi(taxi)
@@ -101,24 +96,26 @@ class TaxiMapFragment : BaseFragment<MyTaxiViewModel>(), OnMapReadyCallback {
         addMarkerOnMap(taxi, true)
     }
 
-    private fun addMarkerOnMap(taxi: Vehicle, showInfo: Boolean) {
-        val capacity = getTaxiCapacity(taxi.fleetType)
+    private fun addMarkerOnMap(vehicle: Vehicle, showInfo: Boolean) {
+        val capacity = getTaxiCapacity(vehicle.fleetType)
 
         val marker = googleMap?.addMarker(
             MarkerOptions()
-                .position(LatLng(taxi.coordinates.first, taxi.coordinates.second))
-                .title(String.format(getString(R.string.title_info_poi), taxi.id, capacity))
+                .position(LatLng(vehicle.coordinates.first, vehicle.coordinates.second))
+                .title(String.format(getString(R.string.title_info_poi), vehicle.id, capacity))
         )
 
-        marker?.tag = taxi.id
+        marker?.tag = vehicle.id
 
         if (showInfo) marker?.showInfoWindow()
 
         googleMap?.setOnMarkerClickListener {
             it.showInfoWindow()
-            val vehicle = taxis?.first { vehicle -> vehicle.id == it.tag }
-            rootView.isVisible(true)
-            bindTaxi(vehicle!!, taxiHeader, taxiDescription, taxiImage)
+            val vehicleWithId = vehicles?.firstOrNull { vehicle -> vehicle.id == it.tag }
+            vehicleWithId?.let {
+                rootView.isVisible(true)
+                bindTaxi(vehicleWithId, taxiHeader, taxiDescription, taxiImage)
+            }
             true
         }
 
@@ -127,23 +124,5 @@ class TaxiMapFragment : BaseFragment<MyTaxiViewModel>(), OnMapReadyCallback {
         }
     }
 
-    override fun onResume() {
-        mapView?.onResume()
-        super.onResume()
-    }
 
-    override fun onPause() {
-        mapView?.onPause()
-        super.onPause()
-    }
-
-    override fun onDestroy() {
-        mapView?.onDestroy()
-        super.onDestroy()
-    }
-
-    override fun onLowMemory() {
-        mapView?.onLowMemory()
-        super.onLowMemory()
-    }
 }
