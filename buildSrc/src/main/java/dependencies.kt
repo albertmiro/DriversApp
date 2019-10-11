@@ -1,79 +1,84 @@
 object Versions {
-    val kotlin_version = "1.3.50"
-    val anko_version = "0.10.4"
-    val retrofit_version = "2.4.0"
-    val rx_android_version = "2.0.2"
-    val smoothprogressbar_circular_version = "1.3.0"
-    val google_maps_version = "17.0.0"
-    val dagger_version = "2.24"
+    const val androidx_core = "1.1.0"
+    const val androidx_appcompat = "1.1.0"
+    const val androidx_constraint = "1.1.3"
+    const val androidx_junit = "1.1.1"
+    const val okhttp_interceptor = "4.0.0"
+    const val koin_version = "2.0.1"
+    const val kotlin_version = "1.3.50"
+    const val anko_version = "0.10.4"
+    const val retrofit_version = "2.4.0"
+    const val rx_android_version = "2.0.2"
+    const val smoothprogressbar_circular_version = "1.3.0"
+    const val google_maps_version = "17.0.0"
 
-    val espresso_version = "3.2.0"
-    val mockito_kotlin_version = "1.1.0"
-    val test_runner_version = "1.0.1"
-    val junit_version = "4.12"
-    val mockito_all = "1.10.19"
-    val mockito_core = "2.18.3"
-    val hamcrest = "1.3"
-    val okhttp_mockwebserver = "3.10.0"
-    val android_core_testing = "1.1.1"
+    const val espresso_version = "3.2.0"
+    const val mockito_kotlin_version = "1.1.0"
+    const val test_runner_version = "1.0.1"
+    const val junit_version = "4.12"
+    const val mockito_all = "1.10.19"
+    const val mockito_core = "2.18.3"
+    const val hamcrest = "1.3"
+    const val okhttp_mockwebserver = "3.10.0"
+    const val android_core_testing = "1.1.1"
 }
 
 object Dependencies {
 
-    val kotlin = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${Versions.kotlin_version}"
-    val appCompat = "androidx.appcompat:appcompat:1.1.0"
-    val androidxCore = "androidx.core:core-ktx:1.1.0"
-    val constraintLayout = "androidx.constraintlayout:constraintlayout:1.1.3"
-    val androidxJunit = "androidx.test.ext:junit:1.1.1"
-    val androidxEspresso = "androidx.test.espresso:espresso-core:${Versions.espresso_version}"
+    //Base
+    val kotlin =        "implementation" to "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${Versions.kotlin_version}"
+    val appCompat =     "implementation" to "androidx.appcompat:appcompat:${Versions.androidx_appcompat}"
+    val androidxCore =  "implementation" to "androidx.core:core-ktx:${Versions.androidx_core}"
+    val constraintLayout = "implementation" to "androidx.constraintlayout:constraintlayout:${Versions.androidx_constraint}"
+    val androidxJunit = "testImplementation" to "androidx.test.ext:junit:${Versions.androidx_junit}"
+    val jUnit =         "testImplementation" to "junit:junit:${Versions.junit_version}"
+    val androidxEspresso = "androidTestImplementation" to "androidx.test.espresso:espresso-core:${Versions.espresso_version}"
 
     //Anko
-    val anko = "org.jetbrains.anko:anko:${Versions.anko_version}"
-    val ankoCommons = "org.jetbrains.anko:anko-commons:${Versions.anko_version}"
-
-    //Dagger2
-    val dagger = "com.google.dagger:dagger:${Versions.dagger_version}"
-    val daggerAndroid = "com.google.dagger:dagger-android:${Versions.dagger_version}"
-    val daggerSupport = "com.google.dagger:dagger-android-support:${Versions.dagger_version}"
-    val daggerAndroidProcessor =
-        "com.google.dagger:dagger-android-processor:${Versions.dagger_version}"
-    val daggerCompiler = "com.google.dagger:dagger-compiler:${Versions.dagger_version}"
+    val anko =          "implementation" to "org.jetbrains.anko:anko:${Versions.anko_version}"
+    val ankoCommons =   "implementation" to  "org.jetbrains.anko:anko-commons:${Versions.anko_version}"
 
     //Retrofit
-    val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit_version}"
-    val retrofitRx = "com.squareup.retrofit2:adapter-rxjava2:${Versions.retrofit_version}"
-    val retrofitGson = "com.squareup.retrofit2:converter-gson:${Versions.retrofit_version}"
+    val retrofit =      "implementation" to "com.squareup.retrofit2:retrofit:${Versions.retrofit_version}"
+    val retrofitRx =    "implementation" to "com.squareup.retrofit2:adapter-rxjava2:${Versions.retrofit_version}"
+    val retrofitGson =  "implementation" to "com.squareup.retrofit2:converter-gson:${Versions.retrofit_version}"
+
+    //Okhttp Interceptor
+    val okhttpInterceptor =
+        "implementation" to "com.squareup.okhttp3:logging-interceptor:${Versions.okhttp_interceptor}"
 
     //Google Maps
-    val googleMaps = "com.google.android.gms:play-services-maps:${Versions.google_maps_version}"
+    val googleMaps =    "implementation" to "com.google.android.gms:play-services-maps:${Versions.google_maps_version}"
 
     //Smooth Progress Bar
-    val progressBar =
-        "com.github.castorflex.smoothprogressbar:library-circular:${Versions.smoothprogressbar_circular_version}"
+    val progressBar =   "implementation" to "com.github.castorflex.smoothprogressbar:library-circular:${Versions.smoothprogressbar_circular_version}"
 
     //RxJava2
-    val rxJava = "io.reactivex.rxjava2:rxandroid:${Versions.rx_android_version}"
+    val rxJava =        "implementation" to "io.reactivex.rxjava2:rxandroid:${Versions.rx_android_version}"
+
+    //Koin
+    val koinViewModel = "implementation" to "org.koin:koin-androidx-viewmodel:${Versions.koin_version}"
 
     //Tests
-    val jUnit = "junit:junit:${Versions.junit_version}"
-    val mockitoAll = "org.mockito:mockito-all:${Versions.mockito_all}"
-    val mockitoCore = "org.mockito:mockito-core:${Versions.mockito_core}"
-    val mockitoKotlin = "com.nhaarman:mockito-kotlin:${Versions.mockito_kotlin_version}"
-    val hamcrest = "org.hamcrest:hamcrest-all:${Versions.hamcrest}"
-    val mockWebServer = "com.squareup.okhttp3:mockwebserver:${Versions.okhttp_mockwebserver}"
-    val coreTesting = "android.arch.core:core-testing:${Versions.android_core_testing}"
-    val testRunner = "com.android.support.test:runner:${Versions.test_runner_version}"
-    val testJunit = "org.jetbrains.kotlin:kotlin-test-junit:${Versions.kotlin_version}"
+    val mockitoAll =    "testImplementation" to "org.mockito:mockito-all:${Versions.mockito_all}"
+    val mockitoCore =   "testImplementation" to "org.mockito:mockito-core:${Versions.mockito_core}"
+    val mockitoKotlin = "testImplementation" to "com.nhaarman:mockito-kotlin:${Versions.mockito_kotlin_version}"
+    val hamcrest =      "testImplementation" to "org.hamcrest:hamcrest-all:${Versions.hamcrest}"
+    val mockWebServer = "testImplementation" to "com.squareup.okhttp3:mockwebserver:${Versions.okhttp_mockwebserver}"
+    val coreTesting =   "testImplementation" to "android.arch.core:core-testing:${Versions.android_core_testing}"
+    val testRunner =    "testImplementation" to "com.android.support.test:runner:${Versions.test_runner_version}"
+    val testJunit =     "testImplementation" to "org.jetbrains.kotlin:kotlin-test-junit:${Versions.kotlin_version}"
 
 }
 
 object Buckets {
 
-    val retrofit =
+    val network =
         listOf(
             Dependencies.retrofit,
             Dependencies.retrofitGson,
-            Dependencies.retrofitRx
+            Dependencies.retrofitRx,
+            Dependencies.okhttpInterceptor
         )
 
     val rxJava =
@@ -111,13 +116,9 @@ object Buckets {
             Dependencies.testJunit
         )
 
-    val dagger =
+    val koin =
         listOf(
-            Dependencies.dagger,
-            Dependencies.daggerAndroid,
-            Dependencies.daggerSupport,
-            Dependencies.daggerAndroidProcessor,
-            Dependencies.daggerCompiler
+            Dependencies.koinViewModel
         )
 
     val anko =
