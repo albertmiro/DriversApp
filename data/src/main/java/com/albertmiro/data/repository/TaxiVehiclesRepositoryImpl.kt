@@ -6,7 +6,6 @@ import com.albertmiro.data.model.MyTaxiResponse
 import com.albertmiro.domain.VehiclesRepository
 import com.albertmiro.domain.domain.Vehicle
 import io.reactivex.Single
-import javax.inject.Singleton
 
 /*
 * Repository using a base Cache with the list of taxis retrieved in the last call,
@@ -14,7 +13,6 @@ import javax.inject.Singleton
 * make the call to the service and update the results
 */
 
-@Singleton
 class TaxiVehiclesRepositoryImpl(val service: VehiclesService) : VehiclesRepository {
 
     var cachedTaxis: List<Vehicle> = emptyList()
