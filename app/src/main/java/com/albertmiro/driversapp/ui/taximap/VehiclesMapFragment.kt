@@ -5,9 +5,9 @@ import com.albertmiro.common.extensions.isVisible
 import com.albertmiro.common.extensions.showMessage
 import com.albertmiro.domain.domain.Vehicle
 import com.albertmiro.driversapp.R
-import com.albertmiro.driversapp.ui.bindTaxi
-import com.albertmiro.driversapp.ui.getTaxiCapacity
+import com.albertmiro.driversapp.ui.BindVehicleUtils
 import com.albertmiro.driversapp.ui.taximap.BaseMapFragment
+import com.albertmiro.driversapp.ui.taximap.VehiclesMap
 import com.albertmiro.driversapp.ui.viewmodel.VehiclesViewModel
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.Marker
@@ -15,7 +15,7 @@ import kotlinx.android.synthetic.main.fragment_vehicle_map.*
 import kotlinx.android.synthetic.main.item_vehicle.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
-class VehiclesMapFragment : BaseMapFragment() {
+class VehiclesMapFragment : BaseMapFragment(), VehiclesMap.View {
 
     override val layoutId: Int = R.layout.fragment_vehicle_map
 
@@ -41,7 +41,7 @@ class VehiclesMapFragment : BaseMapFragment() {
         mainActivity.supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
-    private fun showTaxis() {
+    override fun showTaxis() {
         vehicles?.let {
             if (it.isEmpty()) {
                 context?.showMessage(getString(R.string.no_vehicles))
@@ -69,11 +69,11 @@ class VehiclesMapFragment : BaseMapFragment() {
             else addMarkerOnMap(it, false)
         }
         zoomOnSelectedTaxi(vehicle, ::addMarkerOnMap)
-        bindTaxi(vehicle, vehicleHeader, vehicleDescription, vehicleImage)
+        BindVehicleUtils.bindVehicle(vehicle, vehicleHeader, vehicleDescription, vehicleImage)
     }
 
     private fun addMarkerOnMap(vehicle: Vehicle, showInfo: Boolean) {
-        val capacity = getTaxiCapacity(vehicle.fleetType)
+        val capacity = BindVehicleUtils.getVehicleCapacity(vehicle.fleetType)
         addMarkerAndShowInfo(vehicle, capacity, showInfo)
         setOnMarkerClickListener(::setMarkerInfo)
         setOnInfoWindowCloseListener()
@@ -83,7 +83,12 @@ class VehiclesMapFragment : BaseMapFragment() {
         val vehicleWithId = vehicles?.firstOrNull { vehicle -> vehicle.id == marker.tag }
         vehicleWithId?.let {
             rootView.isVisible(true)
-            bindTaxi(vehicleWithId, vehicleHeader, vehicleDescription, vehicleImage)
+            BindVehicleUtils.bindVehicle(
+                vehicleWithId,
+                vehicleHeader,
+                vehicleDescription,
+                vehicleImage
+            )
         }
     }
 

@@ -17,7 +17,7 @@ class TaxiVehiclesRepositoryImpl(val service: VehiclesService) : VehiclesReposit
 
     var cachedTaxis: List<Vehicle> = emptyList()
 
-    override fun getHamburgTaxis(forceRefresh: Boolean): Single<List<Vehicle>> {
+    override fun getVehicles(forceRefresh: Boolean): Single<List<Vehicle>> {
         return if (cachedTaxis.isEmpty() || forceRefresh) {
             service.getVehicles()
                 .map { response: MyTaxiResponse ->

@@ -14,7 +14,7 @@ import com.albertmiro.driversapp.ui.viewmodel.VehiclesViewModel
 import kotlinx.android.synthetic.main.fragment_vehicles_list.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
-class VehiclesListFragment : BaseFragment() {
+class VehiclesListFragment : BaseFragment(), VehiclesList.View {
 
     override val layoutId: Int = R.layout.fragment_vehicles_list
 
@@ -71,33 +71,33 @@ class VehiclesListFragment : BaseFragment() {
 
     private fun initObservers() {
         vehiclesViewModel.isDataLoading()
-            .observe(this, Observer { updateProgressBarVisibility(it) })
+            .observe(this, Observer { changeProgressBarVisibility(it) })
         vehiclesViewModel.getTaxis().observe(this, Observer { showVehicles(it) })
         vehiclesViewModel.isNetworkError().observe(this, Observer { onNetworkError(it) })
         vehiclesViewModel.isUnknownError().observe(this, Observer { onUnknownError(it) })
     }
 
-    private fun onUnknownError(isUnknownError: Boolean) {
+    override fun onUnknownError(isUnknownError: Boolean) {
         if (isUnknownError) {
             context?.showMessage(getString(R.string.unexpected_error))
             hideRefreshIcon()
         }
     }
 
-    private fun onNetworkError(isNetworkError: Boolean) {
+    override fun onNetworkError(isNetworkError: Boolean) {
         if (isNetworkError) {
             context?.showMessage(getString(R.string.lost_connection))
             hideRefreshIcon()
         }
     }
 
-    private fun updateProgressBarVisibility(dataLoaded: Boolean) {
+    override fun changeProgressBarVisibility(dataLoaded: Boolean) {
         if (!swipeRefresh.isRefreshing) {
             progressBar.isVisible(dataLoaded)
         }
     }
 
-    private fun showVehicles(vehicles: List<Vehicle>) {
+    override fun showVehicles(vehicles: List<Vehicle>) {
         hideRefreshIcon()
         vehiclesAdapter.setItems(vehicles)
         if (vehicles.isEmpty()) {
@@ -105,7 +105,7 @@ class VehiclesListFragment : BaseFragment() {
         }
     }
 
-    private fun hideRefreshIcon() {
+    override fun hideRefreshIcon() {
         if (swipeRefresh.isRefreshing) {
             swipeRefresh.isRefreshing = false
         }

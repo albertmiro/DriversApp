@@ -1,4 +1,4 @@
-package com.albertmiro.driversapp.ui.viewmodel
+package com.albertmiro.driversapp.ui.base.viewmodel
 
 import androidx.lifecycle.ViewModel
 import io.reactivex.disposables.CompositeDisposable

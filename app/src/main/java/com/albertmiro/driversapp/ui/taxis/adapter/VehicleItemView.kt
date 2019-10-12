@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.widget.RelativeLayout
 import com.albertmiro.domain.domain.Vehicle
 import com.albertmiro.driversapp.R
-import com.albertmiro.driversapp.ui.bindTaxi
+import com.albertmiro.driversapp.ui.BindVehicleUtils
 import kotlinx.android.synthetic.main.item_vehicle.view.*
 
 
@@ -15,7 +15,7 @@ class VehicleItemView constructor(context: Context) : RelativeLayout(context) {
     }
 
     fun bind(vehicle: Vehicle) {
-        bindTaxi(vehicle, vehicleHeader, vehicleDescription, vehicleImage)
+        BindVehicleUtils.bindVehicle(vehicle, vehicleHeader, vehicleDescription, vehicleImage)
     }
 
 }
