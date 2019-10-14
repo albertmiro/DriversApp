@@ -1,9 +1,9 @@
 package com.albertmiro.data.mapper
 
-import com.albertmiro.data.model.MyTaxiResponse
-import com.albertmiro.data.model.VehicleResponse
-import com.albertmiro.domain.domain.FleetType
-import com.albertmiro.domain.domain.Vehicle
+import com.albertmiro.data.entities.VehicleEntity
+import com.albertmiro.data.entities.VehiclesEntity
+import com.albertmiro.domain.models.FleetType
+import com.albertmiro.domain.models.Vehicle
 
 /*
 * Mapper methods to transform the service response to our model objects
@@ -12,11 +12,11 @@ import com.albertmiro.domain.domain.Vehicle
 const val TAXI_TYPE = "TAXI"
 const val POOLING_TYPE = "POOLING"
 
-fun toVehicleList(response: MyTaxiResponse): List<Vehicle> {
+fun toVehicleList(response: VehiclesEntity): List<Vehicle> {
     return response.poiList.map { toVehicle(it) }.toList()
 }
 
-fun toVehicle(vehicle: VehicleResponse): Vehicle {
+fun toVehicle(vehicle: VehicleEntity): Vehicle {
     val fleetType: FleetType = when (vehicle.fleetType) {
         TAXI_TYPE -> FleetType.TAXI
         POOLING_TYPE -> FleetType.POOLING

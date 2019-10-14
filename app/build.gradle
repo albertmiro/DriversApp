@@ -36,6 +36,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
 }
 
 
@@ -80,21 +84,23 @@ dependencies {
 
     //Koin
     implementation 'org.koin:koin-androidx-viewmodel:2.0.1'
-    implementation 'com.squareup.okhttp3:logging-interceptor:4.0.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.2.2'
 
     //Tests
     testImplementation "junit:junit:$junit_version"
-    testImplementation "org.mockito:mockito-all:$mockito_all"
-    testImplementation "org.mockito:mockito-core:$mockito_core"
-    testImplementation "com.nhaarman:mockito-kotlin:$mockito_kotlin_version"
-    testImplementation "org.hamcrest:hamcrest-all:$hamcrest"
     testImplementation "com.squareup.okhttp3:mockwebserver:$okhttp_mockwebserver"
     testImplementation "android.arch.core:core-testing:$android_core_testing"
     androidTestImplementation("com.android.support.test.espresso:espresso-core:$espresso_version", {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    androidTestImplementation "com.android.support.test:runner:$test_runner_version"
-    testImplementation "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
+    testImplementation "org.mockito:mockito-core:3.1.0"
+    testImplementation 'org.mockito:mockito-inline:3.0.0'
+    testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0"
+    testImplementation "android.arch.navigation:navigation-testing-ktx:1.0.0-alpha06"
+    testImplementation "io.mockk:mockk:1.9.3.kotlin12"
+    testImplementation "org.jetbrains.kotlin:kotlin-test:1.3.50"
+    androidTestImplementation "com.android.support.test:runner:1.0.2"
+    testImplementation "org.jetbrains.kotlin:kotlin-test-junit:1.3.50"
 }
 
 

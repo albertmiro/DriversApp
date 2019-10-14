@@ -1,6 +1,6 @@
 package com.albertmiro.driversapp.di
 
-import com.albertmiro.data.repository.TaxiVehiclesRepositoryImpl
+import com.albertmiro.data.repository.VehiclesRepositoryImpl
 import com.albertmiro.domain.VehiclesRepository
 import com.albertmiro.domain.usecases.GetVehicles
 import com.albertmiro.driversapp.ui.viewmodel.VehiclesViewModel
@@ -17,5 +17,5 @@ val useCaseModule: Module = module {
 }
 
 val repositoryModule: Module = module {
-    single { TaxiVehiclesRepositoryImpl(service = get()) as VehiclesRepository }
+    single { VehiclesRepositoryImpl(service = get()) as VehiclesRepository }
 }

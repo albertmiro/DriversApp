@@ -71,7 +71,7 @@
 
     <style name="ListTitle" parent="TextBlackTransparent.Txt18.Bold" />
 
-    <style name="TaxiListTitle" parent="TextBlack.Txt15.Bold.OneLine" />
+    <style name="VehiclesListTitle" parent="TextBlack.Txt15.Bold.OneLine" />
 
     <style name="VehicleListSubtitle" parent="TextBlackTransparent.Txt13.Italic.OneLine" />
 

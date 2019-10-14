@@ -26,6 +26,10 @@ android {
         }
     }
 
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
+
 }
 
 dependencies {
@@ -45,9 +49,11 @@ dependencies {
 
     //Koin
     implementation 'org.koin:koin-androidx-viewmodel:2.0.1'
-    implementation 'com.squareup.okhttp3:logging-interceptor:4.0.0'
+
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.2.2'
 
     //Tests
+    testImplementation("com.squareup.okhttp3:okhttp:$okhttp_mockwebserver")
     testImplementation "junit:junit:$junit_version"
     testImplementation "org.mockito:mockito-all:$mockito_all"
     testImplementation "org.mockito:mockito-core:$mockito_core"
