@@ -1,7 +1,7 @@
 package com.albertmiro.driversapp.ui.viewmodel
 
-import com.albertmiro.domain.domain.FleetType
-import com.albertmiro.domain.domain.Vehicle
+import com.albertmiro.domain.models.FleetType
+import com.albertmiro.domain.models.Vehicle
 import com.albertmiro.domain.usecases.GetVehicles
 import io.reactivex.Single
 import io.reactivex.observers.TestObserver

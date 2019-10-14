@@ -1,9 +1,9 @@
-package com.albertmiro.driversapp.ui.taxis.adapter
+package com.albertmiro.driversapp.ui.vehicles.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.widget.RelativeLayout
-import com.albertmiro.domain.domain.Vehicle
+import com.albertmiro.domain.models.Vehicle
 import com.albertmiro.driversapp.R
 import com.albertmiro.driversapp.ui.BindVehicleUtils
 import kotlinx.android.synthetic.main.item_vehicle.view.*

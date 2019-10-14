@@ -1,4 +1,4 @@
-package com.albertmiro.domain.domain
+package com.albertmiro.domain.models
 
 data class Vehicle(
     val id: Int,

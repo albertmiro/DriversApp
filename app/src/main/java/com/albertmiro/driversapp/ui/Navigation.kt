@@ -1,8 +1,8 @@
 package com.albertmiro.driversapp.ui
 
 import com.albertmiro.driversapp.R
-import com.albertmiro.driversapp.ui.taxis.VehiclesListFragment
-import com.albertmiro.driversapp.ui.vehiclemap.VehiclesMapFragment
+import com.albertmiro.driversapp.ui.map.VehiclesMapFragment
+import com.albertmiro.driversapp.ui.vehicles.VehiclesListFragment
 
 fun MainActivity.loadVehiclesListFragment() {
     supportFragmentManager.beginTransaction()

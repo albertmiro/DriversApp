@@ -1,8 +1,8 @@
 package com.albertmiro.domain.usecases
 
 import com.albertmiro.domain.VehiclesRepository
-import com.albertmiro.domain.domain.FleetType
-import com.albertmiro.domain.domain.Vehicle
+import com.albertmiro.domain.models.FleetType
+import com.albertmiro.domain.models.Vehicle
 import com.nhaarman.mockitokotlin2.whenever
 import io.reactivex.Single
 import org.junit.Before

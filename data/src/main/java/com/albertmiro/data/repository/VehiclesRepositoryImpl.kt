@@ -2,9 +2,9 @@ package com.albertmiro.data.repository
 
 import com.albertmiro.data.VehiclesService
 import com.albertmiro.data.mapper.toVehicleList
-import com.albertmiro.data.model.MyTaxiResponse
+import com.albertmiro.data.entities.VehiclesEntity
 import com.albertmiro.domain.VehiclesRepository
-import com.albertmiro.domain.domain.Vehicle
+import com.albertmiro.domain.models.Vehicle
 import io.reactivex.Single
 
 /*
@@ -13,14 +13,14 @@ import io.reactivex.Single
 * make the call to the service and update the results
 */
 
-class TaxiVehiclesRepositoryImpl(val service: VehiclesService) : VehiclesRepository {
+class VehiclesRepositoryImpl(val service: VehiclesService) : VehiclesRepository {
 
     var cachedTaxis: List<Vehicle> = emptyList()
 
     override fun getVehicles(forceRefresh: Boolean): Single<List<Vehicle>> {
         return if (cachedTaxis.isEmpty() || forceRefresh) {
             service.getVehicles()
-                .map { response: MyTaxiResponse ->
+                .map { response: VehiclesEntity ->
                     cachedTaxis = toVehicleList(response)
                     cachedTaxis
                 }

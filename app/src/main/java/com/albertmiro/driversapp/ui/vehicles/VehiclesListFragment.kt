@@ -1,15 +1,15 @@
-package com.albertmiro.driversapp.ui.taxis
+package com.albertmiro.driversapp.ui.vehicles
 
 import android.os.Bundle
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.albertmiro.common.extensions.isVisible
 import com.albertmiro.common.extensions.showMessage
-import com.albertmiro.domain.domain.Vehicle
+import com.albertmiro.domain.models.Vehicle
 import com.albertmiro.driversapp.R
 import com.albertmiro.driversapp.ui.base.BaseFragment
 import com.albertmiro.driversapp.ui.loadVehiclesMapFragment
-import com.albertmiro.driversapp.ui.taxis.adapter.VehiclesAdapter
+import com.albertmiro.driversapp.ui.vehicles.adapter.VehiclesAdapter
 import com.albertmiro.driversapp.ui.viewmodel.VehiclesViewModel
 import kotlinx.android.synthetic.main.fragment_vehicles_list.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
@@ -37,7 +37,7 @@ class VehiclesListFragment : BaseFragment(), VehiclesList.View {
         initSwipeRefresh()
         initObservers()
 
-        vehiclesViewModel.loadTaxis(false)
+        vehiclesViewModel.loadVehicles(false)
     }
 
     private fun hideBackOnToolbar() {
@@ -65,14 +65,14 @@ class VehiclesListFragment : BaseFragment(), VehiclesList.View {
 
     private fun initSwipeRefresh() {
         swipeRefresh.setOnRefreshListener {
-            vehiclesViewModel.loadTaxis(true)
+            vehiclesViewModel.loadVehicles(true)
         }
     }
 
     private fun initObservers() {
         vehiclesViewModel.isDataLoading()
             .observe(this, Observer { changeProgressBarVisibility(it) })
-        vehiclesViewModel.getTaxis().observe(this, Observer { showVehicles(it) })
+        vehiclesViewModel.getVehicles().observe(this, Observer { showVehicles(it) })
         vehiclesViewModel.isNetworkError().observe(this, Observer { onNetworkError(it) })
         vehiclesViewModel.isUnknownError().observe(this, Observer { onUnknownError(it) })
     }

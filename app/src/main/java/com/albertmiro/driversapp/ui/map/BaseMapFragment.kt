@@ -1,8 +1,8 @@
-package com.albertmiro.driversapp.ui.taximap
+package com.albertmiro.driversapp.ui.map
 
 import android.os.Bundle
 import com.albertmiro.common.extensions.isVisible
-import com.albertmiro.domain.domain.Vehicle
+import com.albertmiro.domain.models.Vehicle
 import com.albertmiro.driversapp.R
 import com.albertmiro.driversapp.ui.base.BaseFragment
 import com.google.android.gms.maps.CameraUpdateFactory

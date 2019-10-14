@@ -39,7 +39,7 @@ class VehiclesServiceTest {
 
     @Test
     fun shouldGetNotEmptyListOfTaxis() {
-        enqueueResponse("mytaxi_response.json")
+        enqueueResponse("vehicles_response.json")
         service.getVehicles()
             .test()
             .assertValue({ response -> response.poiList.isNotEmpty() })
@@ -47,7 +47,7 @@ class VehiclesServiceTest {
 
     @Test
     fun shouldGetCorrectNumberOfTaxis() {
-        enqueueResponse("mytaxi_response.json")
+        enqueueResponse("vehicles_response.json")
         service.getVehicles()
             .test()
             .assertValue({ response -> response.poiList.size == 30 })
@@ -55,7 +55,7 @@ class VehiclesServiceTest {
 
     @Test
     fun shouldGetTaxiWithCorrectValues() {
-        enqueueResponse("mytaxi_response.json")
+        enqueueResponse("vehicles_response.json")
         service.getVehicles()
             .test()
             .assertValue { response -> response.poiList.isNotEmpty() }
@@ -68,7 +68,7 @@ class VehiclesServiceTest {
 
     @Test
     fun shouldGetEmptyResponse() {
-        enqueueResponse("mytaxi_response_empty.json")
+        enqueueResponse("vehicles_response_empty.json")
         service.getVehicles()
             .test()
             .assertValue { response -> response.poiList.isNullOrEmpty() }
@@ -76,7 +76,7 @@ class VehiclesServiceTest {
 
     @Test
     fun shouldGetEmptyPOISResponse() {
-        enqueueResponse("mytaxi_response_empty_pois.json")
+        enqueueResponse("vehicles_response_empty_pois.json")
         service.getVehicles()
             .test()
             .assertValue { response -> response.poiList.isEmpty() }

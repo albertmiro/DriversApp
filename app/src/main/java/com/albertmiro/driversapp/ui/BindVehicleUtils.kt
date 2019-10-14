@@ -3,8 +3,8 @@ package com.albertmiro.driversapp.ui
 import android.content.Context
 import android.widget.ImageView
 import android.widget.TextView
-import com.albertmiro.domain.domain.FleetType
-import com.albertmiro.domain.domain.Vehicle
+import com.albertmiro.domain.models.FleetType
+import com.albertmiro.domain.models.Vehicle
 import com.albertmiro.driversapp.R
 
 object BindVehicleUtils {
@@ -43,7 +43,7 @@ object BindVehicleUtils {
         }
     }
 
-    fun getVehicleImage(fleetType: FleetType, vehicleId: Int): Int {
+    private fun getVehicleImage(fleetType: FleetType, vehicleId: Int): Int {
         return when (fleetType) {
             FleetType.TAXI -> {
                 when {
@@ -57,12 +57,12 @@ object BindVehicleUtils {
                     else -> R.drawable.vehicle4
                 }
             }
-            else -> R.drawable.vehicle1
+            else -> R.drawable.vehicle5
         }
     }
 
-    private fun isMod2(num: Int) = num % 2 == 1
+    private fun isMod2(num: Int) = num % 2 == 0
 
-    fun getFormattedString(context: Context, stringId: Int, value: Int): String =
+    private fun getFormattedString(context: Context, stringId: Int, value: Int): String =
         String.format(context.getString(stringId), value)
 }

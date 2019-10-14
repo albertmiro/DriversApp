@@ -2,11 +2,11 @@ package com.albertmiro.driversapp.ui.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.albertmiro.domain.domain.Vehicle
+import com.albertmiro.domain.models.Vehicle
 import com.albertmiro.domain.usecases.GetVehicles
 import com.albertmiro.driversapp.ui.base.viewmodel.BaseViewModel
-import com.albertmiro.driversapp.ui.taximap.VehiclesMap
-import com.albertmiro.driversapp.ui.taxis.VehiclesList
+import com.albertmiro.driversapp.ui.map.VehiclesMap
+import com.albertmiro.driversapp.ui.vehicles.VehiclesList
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import java.net.UnknownHostException
@@ -15,11 +15,11 @@ class VehiclesViewModel(val getVehicles: GetVehicles) : BaseViewModel(),
     VehiclesList.ViewModel,
     VehiclesMap.ViewModel {
 
-    private var isDataLoading: MutableLiveData<Boolean> = MutableLiveData()
-    private var isNetworkError: MutableLiveData<Boolean> = MutableLiveData()
-    private var isUnknownError: MutableLiveData<Boolean> = MutableLiveData()
-    private var vehicles: MutableLiveData<List<Vehicle>> = MutableLiveData()
-    private var vehicleId: MutableLiveData<Int> = MutableLiveData()
+    var isDataLoading: MutableLiveData<Boolean> = MutableLiveData()
+    var isNetworkError: MutableLiveData<Boolean> = MutableLiveData()
+    var isUnknownError: MutableLiveData<Boolean> = MutableLiveData()
+    var vehicles: MutableLiveData<List<Vehicle>> = MutableLiveData()
+    var vehicleId: MutableLiveData<Int> = MutableLiveData()
 
     override fun isDataLoading(): LiveData<Boolean> = isDataLoading
 
@@ -29,11 +29,11 @@ class VehiclesViewModel(val getVehicles: GetVehicles) : BaseViewModel(),
 
     override fun setCurrentTaxiId(taxiId: Int) = this.vehicleId.postValue(taxiId)
 
-    override fun getTaxis(): LiveData<List<Vehicle>> = vehicles
+    override fun getVehicles(): LiveData<List<Vehicle>> = vehicles
 
     override fun getCurrentVehicleId() = vehicleId
 
-    override fun loadTaxis(forceRefresh: Boolean) {
+    override fun loadVehicles(forceRefresh: Boolean) {
         compositeDisposable.add(getVehicles.invoke(forceRefresh)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())

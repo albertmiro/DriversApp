@@ -1,6 +1,6 @@
 package com.albertmiro.driversapp.ui
 
-import com.albertmiro.domain.domain.FleetType
+import com.albertmiro.domain.models.FleetType
 import com.albertmiro.driversapp.ui.BindVehicleUtils.getVehicleCapacity
 import org.junit.Assert
 import org.junit.Test

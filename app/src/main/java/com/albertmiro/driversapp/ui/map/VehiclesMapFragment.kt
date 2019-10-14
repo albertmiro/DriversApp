@@ -1,13 +1,11 @@
-package com.albertmiro.driversapp.ui.vehiclemap
+package com.albertmiro.driversapp.ui.map
 
 import android.os.Bundle
 import com.albertmiro.common.extensions.isVisible
 import com.albertmiro.common.extensions.showMessage
-import com.albertmiro.domain.domain.Vehicle
+import com.albertmiro.domain.models.Vehicle
 import com.albertmiro.driversapp.R
 import com.albertmiro.driversapp.ui.BindVehicleUtils
-import com.albertmiro.driversapp.ui.taximap.BaseMapFragment
-import com.albertmiro.driversapp.ui.taximap.VehiclesMap
 import com.albertmiro.driversapp.ui.viewmodel.VehiclesViewModel
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.Marker
@@ -22,7 +20,7 @@ class VehiclesMapFragment : BaseMapFragment(), VehiclesMap.View {
     private val vehiclesViewModel: VehiclesViewModel by sharedViewModel()
 
     private val vehicleId by lazy { vehiclesViewModel.getCurrentVehicleId().value ?: -1 }
-    private val vehicles by lazy { vehiclesViewModel.getTaxis().value }
+    private val vehicles by lazy { vehiclesViewModel.getVehicles().value }
 
     companion object {
         fun newInstance(): VehiclesMapFragment {
@@ -34,14 +32,15 @@ class VehiclesMapFragment : BaseMapFragment(), VehiclesMap.View {
         super.onActivityCreated(savedInstanceState)
         showActionBar()
         initMapView(savedInstanceState)
-        showTaxis()
+        showVehicles()
     }
 
     private fun showActionBar() {
         mainActivity.supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
-    override fun showTaxis() {
+    override fun showVehicles() {
+        //TODO: This logic can be moved to viewmodel
         vehicles?.let {
             if (it.isEmpty()) {
                 context?.showMessage(getString(R.string.no_vehicles))

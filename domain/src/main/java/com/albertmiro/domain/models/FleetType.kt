@@ -1,4 +1,4 @@
-package com.albertmiro.domain.domain
+package com.albertmiro.domain.models
 
 enum class FleetType {
     TAXI,
