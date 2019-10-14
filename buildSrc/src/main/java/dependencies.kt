@@ -3,24 +3,30 @@ object Versions {
     const val androidx_appcompat = "1.1.0"
     const val androidx_constraint = "1.1.3"
     const val androidx_junit = "1.1.1"
-    const val okhttp_interceptor = "4.0.0"
+    const val androidx_recyclerview = "1.0.0"
+    const val androidx_cardview = "1.0.0"
+    const val okhttp_interceptor = "4.2.2"
     const val koin_version = "2.0.1"
     const val kotlin_version = "1.3.50"
     const val anko_version = "0.10.4"
     const val retrofit_version = "2.4.0"
-    const val rx_android_version = "2.0.2"
+    const val rx_android_version = "2.1.1"
     const val smoothprogressbar_circular_version = "1.3.0"
     const val google_maps_version = "17.0.0"
-
     const val espresso_version = "3.2.0"
-    const val mockito_kotlin_version = "1.1.0"
+    const val mockito_kotlin_version = "2.2.0"
+    const val leak_canary = "2.0-beta-3"
+
     const val test_runner_version = "1.0.1"
     const val junit_version = "4.12"
+    const val kotlin_test = "1.3.50"
     const val mockito_all = "1.10.19"
-    const val mockito_core = "2.18.3"
+    const val mockito_inline = "3.0.0"
+    const val mockito_core = "3.1.0"
     const val hamcrest = "1.3"
-    const val okhttp_mockwebserver = "3.10.0"
+    const val okhttp_mockwebserver = "4.2.2"
     const val android_core_testing = "1.1.1"
+
 }
 
 object Dependencies {
@@ -33,6 +39,11 @@ object Dependencies {
     val androidxJunit = "testImplementation" to "androidx.test.ext:junit:${Versions.androidx_junit}"
     val jUnit =         "testImplementation" to "junit:junit:${Versions.junit_version}"
     val androidxEspresso = "androidTestImplementation" to "androidx.test.espresso:espresso-core:${Versions.espresso_version}"
+
+    //Android libraries
+    val recyclerview = "implementation" to "androidx.recyclerview:recyclerview:${Versions.androidx_recyclerview}"
+    val cardview =     "implementation" to "androidx.cardview:cardview:${Versions.androidx_cardview}"
+
 
     //Anko
     val anko =          "implementation" to "org.jetbrains.anko:anko:${Versions.anko_version}"
@@ -62,12 +73,16 @@ object Dependencies {
     //Tests
     val mockitoAll =    "testImplementation" to "org.mockito:mockito-all:${Versions.mockito_all}"
     val mockitoCore =   "testImplementation" to "org.mockito:mockito-core:${Versions.mockito_core}"
-    val mockitoKotlin = "testImplementation" to "com.nhaarman:mockito-kotlin:${Versions.mockito_kotlin_version}"
+    val mockitoInline = "testImplementation" to "org.mockito:mockito-inline:${Versions.mockito_inline}"
+    val kotlinTest =    "testImplementation" to "org.jetbrains.kotlin:kotlin-test:${Versions.kotlin_test}"
+    val mockitoKotlin = "testImplementation" to "com.nhaarman.mockitokotlin2:mockito-kotlin:${Versions.mockito_kotlin_version}"
     val hamcrest =      "testImplementation" to "org.hamcrest:hamcrest-all:${Versions.hamcrest}"
     val mockWebServer = "testImplementation" to "com.squareup.okhttp3:mockwebserver:${Versions.okhttp_mockwebserver}"
     val coreTesting =   "testImplementation" to "android.arch.core:core-testing:${Versions.android_core_testing}"
     val testRunner =    "testImplementation" to "com.android.support.test:runner:${Versions.test_runner_version}"
     val testJunit =     "testImplementation" to "org.jetbrains.kotlin:kotlin-test-junit:${Versions.kotlin_version}"
+
+    val leakCanary =    "debugImplementation" to "com.squareup.leakcanary:leakcanary-android:${Versions.leak_canary}"
 
 }
 
@@ -89,7 +104,9 @@ object Buckets {
     val appLibraries =
         listOf(
             Dependencies.progressBar,
-            Dependencies.googleMaps
+            Dependencies.googleMaps,
+            Dependencies.recyclerview,
+            Dependencies.cardview
         )
 
     val baseAndroid =
@@ -105,10 +122,12 @@ object Buckets {
 
     val testing =
         listOf(
-            Dependencies.jUnit,
-            Dependencies.mockitoAll,
-            Dependencies.mockitoCore,
             Dependencies.mockitoKotlin,
+            Dependencies.mockitoCore,
+            Dependencies.mockitoAll,
+            Dependencies.mockitoInline,
+            Dependencies.jUnit,
+            Dependencies.kotlinTest,
             Dependencies.hamcrest,
             Dependencies.mockWebServer,
             Dependencies.coreTesting,
@@ -125,5 +144,10 @@ object Buckets {
         listOf(
             Dependencies.anko,
             Dependencies.ankoCommons
+        )
+
+    val tools =
+        listOf(
+            Dependencies.leakCanary
         )
 }
