@@ -2,6 +2,11 @@
 
 Drivers App is a test app, to show an example of a MVVM architecture consuming a REST service to show the available drivers that are around the city of Hamburg. Letting the users select a driver and check their position in a map.
 
+<p float="left" align="center">
+  <img src="art/app0.png " width="280">
+  <img src="art/app1.png " width="280">
+</p>
+
 ## What I should know
 
 If you want to clone or download this project and try it out, you should follow the next steps:
@@ -64,3 +69,5 @@ This project is a refactor from another one I made, that was not following all t
 so I decided to refactor the old one, and add the layer separation, change Dagger to use Koin for
 dependency injection due to the size of the project and the simplicity of Koin, include more tests and use a
 more meaningful gradle dependency organization, between other improvements.
+
+An example of a Java project, using Dagger can be found at: [Albums4U](https://github.com/albertmiro/Album4U) (made a year ago, does not have the last improvements)
