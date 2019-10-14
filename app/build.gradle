@@ -48,13 +48,15 @@ dependencies {
     implementation project(':domain')
     implementation project(':data')
     implementation project(':common')
+
     Buckets.baseAndroid.forEach { add(it.first, it.second) }
+    Buckets.testing.forEach { add(it.first, it.second) }
     Buckets.koin.forEach { add(it.first, it.second) }
     Buckets.anko.forEach { add(it.first, it.second) }
     Buckets.appLibraries.forEach { add(it.first, it.second) }
     Buckets.rxJava.forEach { add(it.first, it.second) }
     Buckets.network.forEach { add(it.first, it.second) }
-    Buckets.testing.forEach { add(it.first, it.second) }
+
 }
 
 

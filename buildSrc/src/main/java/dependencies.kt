@@ -13,16 +13,19 @@ object Versions {
     const val rx_android_version = "2.1.1"
     const val smoothprogressbar_circular_version = "1.3.0"
     const val google_maps_version = "17.0.0"
-
     const val espresso_version = "3.2.0"
-    const val mockito_kotlin_version = "1.1.0"
+    const val mockito_kotlin_version = "2.2.0"
+
     const val test_runner_version = "1.0.1"
     const val junit_version = "4.12"
+    const val kotlin_test = "1.3.50"
     const val mockito_all = "1.10.19"
-    const val mockito_core = "2.18.3"
+    const val mockito_inline = "3.0.0"
+    const val mockito_core = "3.1.0"
     const val hamcrest = "1.3"
-    const val okhttp_mockwebserver = "3.10.0"
+    const val okhttp_mockwebserver = "4.2.2"
     const val android_core_testing = "1.1.1"
+
 }
 
 object Dependencies {
@@ -69,12 +72,15 @@ object Dependencies {
     //Tests
     val mockitoAll =    "testImplementation" to "org.mockito:mockito-all:${Versions.mockito_all}"
     val mockitoCore =   "testImplementation" to "org.mockito:mockito-core:${Versions.mockito_core}"
-    val mockitoKotlin = "testImplementation" to "com.nhaarman:mockito-kotlin:${Versions.mockito_kotlin_version}"
+    val mockitoInline = "testImplementation" to "org.mockito:mockito-inline:${Versions.mockito_inline}"
+    val kotlinTest =    "testImplementation" to "org.jetbrains.kotlin:kotlin-test:${Versions.kotlin_test}"
+    val mockitoKotlin = "testImplementation" to "com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0"
     val hamcrest =      "testImplementation" to "org.hamcrest:hamcrest-all:${Versions.hamcrest}"
     val mockWebServer = "testImplementation" to "com.squareup.okhttp3:mockwebserver:${Versions.okhttp_mockwebserver}"
     val coreTesting =   "testImplementation" to "android.arch.core:core-testing:${Versions.android_core_testing}"
     val testRunner =    "testImplementation" to "com.android.support.test:runner:${Versions.test_runner_version}"
     val testJunit =     "testImplementation" to "org.jetbrains.kotlin:kotlin-test-junit:${Versions.kotlin_version}"
+
 
 }
 
@@ -114,10 +120,12 @@ object Buckets {
 
     val testing =
         listOf(
-            Dependencies.jUnit,
-            Dependencies.mockitoAll,
-            Dependencies.mockitoCore,
             Dependencies.mockitoKotlin,
+            Dependencies.mockitoCore,
+            Dependencies.mockitoAll,
+            Dependencies.mockitoInline,
+            Dependencies.jUnit,
+            Dependencies.kotlinTest,
             Dependencies.hamcrest,
             Dependencies.mockWebServer,
             Dependencies.coreTesting,
