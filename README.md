@@ -1,7 +1,6 @@
 # Drivers App
 
-Drivers App is a test app, to show an example of a MVVM architecture consuming a REST service to show the available drivers that are around the city of Hamburg. Letting the
-users select a driver and check their position in a map.
+Drivers App is a test app, to show an example of a MVVM architecture consuming a REST service to show the available drivers that are around the city of Hamburg. Letting the users select a driver and check their position in a map.
 
 ## What I should know
 
@@ -9,9 +8,9 @@ If you want to clone or download this project and try it out, you should follow 
 
 ### Maps API KEY
 
-In the [project.properties] file, you would find something like:
+In the [project.properties](project.properties) file, you would find something like:
 
-*project.properties:
+*project.properties:*
 
 ```
 google_maps_api_key="YOUR MAPS API KEY"
@@ -57,7 +56,7 @@ Some of the libraries used in this project are the following ones:
 - Mockito
 - JUnit
 
-The detail of all the libraries used can be found at: [buildSrc/src/main/java/dependencies.kt]
+The detail of all the libraries used can be found at: [buildSrc/src/main/java/dependencies.kt](buildSrc/src/main/java/dependencies.kt)
 
 ## Other information of interest
 
