@@ -5,66 +5,14 @@ apply plugin: 'kotlin-kapt'
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.1"
-
-
-    defaultConfig {
-        minSdkVersion 22
-        targetSdkVersion 29
-        versionCode 1
-        versionName "1.0"
-
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-    }
-
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
-        debug {
-
-        }
-    }
-
-    testOptions {
-        unitTests.returnDefaultValues = true
-    }
-
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation project(path:':domain')
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'androidx.core:core-ktx:1.1.0'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    implementation project(':domain')
 
-    //Retrofit
-    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
-    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit_version"
-    implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
-
-    //Koin
-    implementation 'org.koin:koin-androidx-viewmodel:2.0.1'
-
-    implementation 'com.squareup.okhttp3:logging-interceptor:4.2.2'
-
-    //Tests
-    testImplementation("com.squareup.okhttp3:okhttp:$okhttp_mockwebserver")
-    testImplementation "junit:junit:$junit_version"
-    testImplementation "org.mockito:mockito-all:$mockito_all"
-    testImplementation "org.mockito:mockito-core:$mockito_core"
-    testImplementation "com.nhaarman:mockito-kotlin:$mockito_kotlin_version"
-    testImplementation "org.hamcrest:hamcrest-all:$hamcrest"
-    testImplementation "com.squareup.okhttp3:mockwebserver:$okhttp_mockwebserver"
-    testImplementation "android.arch.core:core-testing:$android_core_testing"
-    androidTestImplementation("com.android.support.test.espresso:espresso-core:$espresso_version", {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
-    androidTestImplementation "com.android.support.test:runner:$test_runner_version"
-    testImplementation "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
-
+    Buckets.baseAndroid.forEach { add(it.first, it.second) }
+    Buckets.koin.forEach { add(it.first, it.second) }
+    Buckets.network.forEach { add(it.first, it.second) }
+    Buckets.testing.forEach { add(it.first, it.second) }
 }

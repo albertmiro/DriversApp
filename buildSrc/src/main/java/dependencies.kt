@@ -3,12 +3,14 @@ object Versions {
     const val androidx_appcompat = "1.1.0"
     const val androidx_constraint = "1.1.3"
     const val androidx_junit = "1.1.1"
-    const val okhttp_interceptor = "4.0.0"
+    const val androidx_recyclerview = "1.0.0"
+    const val androidx_cardview = "1.0.0"
+    const val okhttp_interceptor = "4.2.2"
     const val koin_version = "2.0.1"
     const val kotlin_version = "1.3.50"
     const val anko_version = "0.10.4"
     const val retrofit_version = "2.4.0"
-    const val rx_android_version = "2.0.2"
+    const val rx_android_version = "2.1.1"
     const val smoothprogressbar_circular_version = "1.3.0"
     const val google_maps_version = "17.0.0"
 
@@ -33,6 +35,11 @@ object Dependencies {
     val androidxJunit = "testImplementation" to "androidx.test.ext:junit:${Versions.androidx_junit}"
     val jUnit =         "testImplementation" to "junit:junit:${Versions.junit_version}"
     val androidxEspresso = "androidTestImplementation" to "androidx.test.espresso:espresso-core:${Versions.espresso_version}"
+
+    //Android libraries
+    val recyclerview = "implementation" to "androidx.recyclerview:recyclerview:${Versions.androidx_recyclerview}"
+    val cardview =     "implementation" to "androidx.cardview:cardview:${Versions.androidx_cardview}"
+
 
     //Anko
     val anko =          "implementation" to "org.jetbrains.anko:anko:${Versions.anko_version}"
@@ -89,7 +96,9 @@ object Buckets {
     val appLibraries =
         listOf(
             Dependencies.progressBar,
-            Dependencies.googleMaps
+            Dependencies.googleMaps,
+            Dependencies.recyclerview,
+            Dependencies.cardview
         )
 
     val baseAndroid =
