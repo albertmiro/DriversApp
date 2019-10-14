@@ -15,6 +15,7 @@ object Versions {
     const val google_maps_version = "17.0.0"
     const val espresso_version = "3.2.0"
     const val mockito_kotlin_version = "2.2.0"
+    const val leak_canary = "2.0-beta-3"
 
     const val test_runner_version = "1.0.1"
     const val junit_version = "4.12"
@@ -74,13 +75,14 @@ object Dependencies {
     val mockitoCore =   "testImplementation" to "org.mockito:mockito-core:${Versions.mockito_core}"
     val mockitoInline = "testImplementation" to "org.mockito:mockito-inline:${Versions.mockito_inline}"
     val kotlinTest =    "testImplementation" to "org.jetbrains.kotlin:kotlin-test:${Versions.kotlin_test}"
-    val mockitoKotlin = "testImplementation" to "com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0"
+    val mockitoKotlin = "testImplementation" to "com.nhaarman.mockitokotlin2:mockito-kotlin:${Versions.mockito_kotlin_version}"
     val hamcrest =      "testImplementation" to "org.hamcrest:hamcrest-all:${Versions.hamcrest}"
     val mockWebServer = "testImplementation" to "com.squareup.okhttp3:mockwebserver:${Versions.okhttp_mockwebserver}"
     val coreTesting =   "testImplementation" to "android.arch.core:core-testing:${Versions.android_core_testing}"
     val testRunner =    "testImplementation" to "com.android.support.test:runner:${Versions.test_runner_version}"
     val testJunit =     "testImplementation" to "org.jetbrains.kotlin:kotlin-test-junit:${Versions.kotlin_version}"
 
+    val leakCanary =    "debugImplementation" to "com.squareup.leakcanary:leakcanary-android:${Versions.leak_canary}"
 
 }
 
@@ -142,5 +144,10 @@ object Buckets {
         listOf(
             Dependencies.anko,
             Dependencies.ankoCommons
+        )
+
+    val tools =
+        listOf(
+            Dependencies.leakCanary
         )
 }

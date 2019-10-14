@@ -56,7 +56,7 @@ dependencies {
     Buckets.appLibraries.forEach { add(it.first, it.second) }
     Buckets.rxJava.forEach { add(it.first, it.second) }
     Buckets.network.forEach { add(it.first, it.second) }
-
+    Buckets.tools.forEach { add(it.first, it.second) }
 }
 
 
