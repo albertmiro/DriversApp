@@ -6,9 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.albertmiro.driversapp.ui.MainActivity
-import com.albertmiro.driversapp.ui.base.viewmodel.Base
 
-abstract class BaseFragment : Fragment(), Base.View {
+abstract class BaseFragment : Fragment() {
 
     protected abstract val layoutId: Int
 

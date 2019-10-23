@@ -14,7 +14,7 @@ import com.albertmiro.driversapp.ui.viewmodel.VehiclesViewModel
 import kotlinx.android.synthetic.main.fragment_vehicles_list.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
-class VehiclesListFragment : BaseFragment(), VehiclesList.View {
+class VehiclesListFragment : BaseFragment() {
 
     override val layoutId: Int = R.layout.fragment_vehicles_list
 
@@ -77,27 +77,27 @@ class VehiclesListFragment : BaseFragment(), VehiclesList.View {
         vehiclesViewModel.isUnknownError().observe(this, Observer { onUnknownError(it) })
     }
 
-    override fun onUnknownError(isUnknownError: Boolean) {
+    private fun onUnknownError(isUnknownError: Boolean) {
         if (isUnknownError) {
             context?.showMessage(getString(R.string.unexpected_error))
             hideRefreshIcon()
         }
     }
 
-    override fun onNetworkError(isNetworkError: Boolean) {
+    private fun onNetworkError(isNetworkError: Boolean) {
         if (isNetworkError) {
             context?.showMessage(getString(R.string.lost_connection))
             hideRefreshIcon()
         }
     }
 
-    override fun changeProgressBarVisibility(dataLoaded: Boolean) {
+    private fun changeProgressBarVisibility(dataLoaded: Boolean) {
         if (!swipeRefresh.isRefreshing) {
             progressBar.isVisible(dataLoaded)
         }
     }
 
-    override fun showVehicles(vehicles: List<Vehicle>) {
+    private fun showVehicles(vehicles: List<Vehicle>) {
         hideRefreshIcon()
         vehiclesAdapter.setItems(vehicles)
         if (vehicles.isEmpty()) {
@@ -105,7 +105,7 @@ class VehiclesListFragment : BaseFragment(), VehiclesList.View {
         }
     }
 
-    override fun hideRefreshIcon() {
+    private fun hideRefreshIcon() {
         if (swipeRefresh.isRefreshing) {
             swipeRefresh.isRefreshing = false
         }
