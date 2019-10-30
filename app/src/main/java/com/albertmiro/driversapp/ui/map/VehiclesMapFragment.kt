@@ -13,7 +13,7 @@ import kotlinx.android.synthetic.main.fragment_vehicle_map.*
 import kotlinx.android.synthetic.main.item_vehicle.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
-class VehiclesMapFragment : BaseMapFragment(), VehiclesMap.View {
+class VehiclesMapFragment : BaseMapFragment() {
 
     override val layoutId: Int = R.layout.fragment_vehicle_map
 
@@ -39,8 +39,7 @@ class VehiclesMapFragment : BaseMapFragment(), VehiclesMap.View {
         mainActivity.supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
-    override fun showVehicles() {
-        //TODO: This logic can be moved to viewmodel
+    fun showVehicles() {
         vehicles?.let {
             if (it.isEmpty()) {
                 context?.showMessage(getString(R.string.no_vehicles))
@@ -62,13 +61,15 @@ class VehiclesMapFragment : BaseMapFragment(), VehiclesMap.View {
     }
 
     private fun showTaxisOnMap() {
-        lateinit var vehicle: Vehicle
+        var vehicle: Vehicle? = null
         vehicles?.forEach {
             if (it.id == vehicleId) vehicle = it
             else addMarkerOnMap(it, false)
         }
-        zoomOnSelectedTaxi(vehicle, ::addMarkerOnMap)
-        BindVehicleUtils.bindVehicle(vehicle, vehicleHeader, vehicleDescription, vehicleImage)
+        vehicle?.let {
+            zoomOnSelectedTaxi(it, ::addMarkerOnMap)
+            BindVehicleUtils.bindVehicle(it, vehicleHeader, vehicleDescription, vehicleImage)
+        }
     }
 
     private fun addMarkerOnMap(vehicle: Vehicle, showInfo: Boolean) {
